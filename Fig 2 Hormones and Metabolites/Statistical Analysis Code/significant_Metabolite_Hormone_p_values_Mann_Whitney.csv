@@ -1,0 +1,12 @@
+,Metabolite/Hormone,group1,group2,p_value
+0,Leptin,control ad lib,control restriction,0.0466988372643963
+1,Leptin,control ad lib,HFHS restriction,0.02113005304197832
+2,Leptin,control restriction,HFHS ad lib,0.005535822276595939
+3,Leptin,HFHS ad lib,HFHS restriction,0.0021317156915536613
+4,Adiponectin,control ad lib,control restriction,0.002359099364057514
+5,Adiponectin,control restriction,HFHS restriction,0.006709328960248736
+6,Triglyceride,control ad lib,HFHS ad lib,0.0005164877548034081
+7,Triglyceride,HFHS ad lib,HFHS restriction,0.02836911068759672
+8,liver_weight,control ad lib,HFHS ad lib,0.0317890771704101
+9,liver_weight,control restriction,HFHS ad lib,0.002942170307116614
+10,liver_weight,HFHS ad lib,control restriction,0.0029421703071166204

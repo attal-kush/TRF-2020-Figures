@@ -1,0 +1,41 @@
+,df,sum_sq,mean_sq,F,PR(>F),group1,group2,meandiff,p-adj,lower,upper,reject
+C(diet),1.0,1.1447973650927437,1.1447973650927437,2.0695721695060745,0.16028413732036687,,,,,,,Leptin
+C(feeding_schedule),1.0,10.164623910441428,10.164623910441428,18.37567363447011,0.00016369398399855253,,,,,,,
+C(diet):C(feeding_schedule),1.0,2.489158587472996,2.489158587472996,4.499917186395537,0.041995480152766954,,,,,,,
+Residual,31.0,17.14785250825286,0.5531565325242859,,,,,,,,,
+,,,,,,HFHS ad lib,HFHS restriction,-1.629,0.001,-2.6098,-0.6481,True
+,,,,,,HFHS ad lib,control ad lib,-0.9438,0.0627,-1.9246,0.037,False
+,,,,,,HFHS ad lib,control restriction,-1.5047,0.0013,-2.4855,-0.5238,True
+,,,,,,HFHS restriction,control ad lib,0.6851,0.2273,-0.2664,1.6367,False
+,,,,,,HFHS restriction,control restriction,0.1243,0.9,-0.8272,1.0758,False
+,,,,,,control ad lib,control restriction,-0.5608,0.3947,-1.5124,0.3907,False
+C(diet),1.0,1.155966833695347,1.155966833695347,0.4847075146815965,0.49148510387342614,,,,,,,Adiponectin
+C(feeding_schedule),1.0,4.796306666795599,4.796306666795599,2.011135455055768,0.16612335431887668,,,,,,,
+C(diet):C(feeding_schedule),1.0,33.416254976434786,33.416254976434786,14.011742748549269,0.0007416468857024721,,,,,,,
+Residual,31.0,73.93112497563749,2.3848749992141127,,,,,,,,,
+,,,,,,HFHS ad lib,HFHS restriction,-1.2751,0.3415,-3.3116,0.7615,False
+,,,,,,HFHS ad lib,control ad lib,-1.6307,0.1533,-3.6672,0.4059,False
+,,,,,,HFHS ad lib,control restriction,1.0078,0.5393,-1.0287,3.0444,False
+,,,,,,HFHS restriction,control ad lib,-0.3556,0.9,-2.3313,1.6202,False
+,,,,,,HFHS restriction,control restriction,2.2829,0.0186,0.3071,4.2586,True
+,,,,,,control ad lib,control restriction,2.6385,0.0054,0.6627,4.6142,True
+C(diet),1.0,24.58482475534072,24.58482475534072,32.303410132539994,3.026678037883112e-06,,,,,,,Triglyceride
+C(feeding_schedule),1.0,4.021767861082212,4.021767861082212,5.284431268772179,0.028419734236223643,,,,,,,
+C(diet):C(feeding_schedule),1.0,4.189898899407902,4.189898899407902,5.505348275140699,0.02552863635902006,,,,,,,
+Residual,31.0,23.592851785262482,0.7610597350084671,,,,,,,,,
+,,,,,,HFHS ad lib,HFHS restriction,-1.3924,0.0129,-2.5429,-0.2419,True
+,,,,,,HFHS ad lib,control ad lib,-2.4107,0.001,-3.5612,-1.2603,True
+,,,,,,HFHS ad lib,control restriction,-2.4174,0.001,-3.5678,-1.2669,True
+,,,,,,HFHS restriction,control ad lib,-1.0183,0.0839,-2.1344,0.0978,False
+,,,,,,HFHS restriction,control restriction,-1.025,0.0811,-2.1411,0.0912,False
+,,,,,,control ad lib,control restriction,-0.0066,0.9,-1.1228,1.1095,False
+C(diet),1.0,57.742760037348376,57.742760037348376,7.794736716892743,0.008893537336050607,,,,,,,liver_weight
+C(feeding_schedule),1.0,32.42353337294517,32.42353337294517,4.376876095116058,0.04471282723598937,,,,,,,
+C(diet):C(feeding_schedule),1.0,0.9900042087542147,0.9900042087542147,0.1336413803369208,0.7171687301341811,,,,,,,
+Residual,31.0,229.6454166666667,7.407916666666668,,,,,,,,,
+,,,,,,HFHS ad lib,HFHS restriction,-2.2736,0.3314,-5.8629,1.3157,False
+,,,,,,HFHS ad lib,control ad lib,-2.9736,0.1326,-6.5629,0.6157,False
+,,,,,,HFHS ad lib,control restriction,-4.5736,0.0083,-8.1629,-0.9843,True
+,,,,,,HFHS restriction,control ad lib,-0.7,0.9,-4.1822,2.7822,False
+,,,,,,HFHS restriction,control restriction,-2.3,0.2962,-5.7822,1.1822,False
+,,,,,,control ad lib,control restriction,-1.6,0.5922,-5.0822,1.8822,False

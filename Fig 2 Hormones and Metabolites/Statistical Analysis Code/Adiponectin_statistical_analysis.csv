@@ -1,0 +1,11 @@
+,df,sum_sq,mean_sq,F,PR(>F),group1,group2,meandiff,p-adj,lower,upper,reject
+C(diet),1.0,1.155966833695347,1.155966833695347,0.4847075146815965,0.49148510387342614,,,,,,,
+C(feeding_schedule),1.0,4.796306666795599,4.796306666795599,2.011135455055768,0.16612335431887668,,,,,,,
+C(diet):C(feeding_schedule),1.0,33.416254976434786,33.416254976434786,14.011742748549269,0.0007416468857024721,,,,,,,
+Residual,31.0,73.93112497563749,2.3848749992141127,,,,,,,,,
+0,,,,,,HFHS ad lib,HFHS restriction,-1.2751,0.3415,-3.3116,0.7615,False
+1,,,,,,HFHS ad lib,control ad lib,-1.6307,0.1533,-3.6672,0.4059,False
+2,,,,,,HFHS ad lib,control restriction,1.0078,0.5393,-1.0287,3.0444,False
+3,,,,,,HFHS restriction,control ad lib,-0.3556,0.9,-2.3313,1.6202,False
+4,,,,,,HFHS restriction,control restriction,2.2829,0.0186,0.3071,4.2586,True
+5,,,,,,control ad lib,control restriction,2.6385,0.0054,0.6627,4.6142,True

@@ -1,0 +1,49 @@
+,Metabolite/Hormone,group1,group2,p_value
+0,Leptin,control ad lib,control restriction,0.0466988372643963
+1,Leptin,control ad lib,HFHS ad lib,0.06918117094012531
+2,Leptin,control ad lib,HFHS restriction,0.02113005304197832
+3,Leptin,control restriction,control ad lib,0.0466988372643963
+4,Leptin,control restriction,HFHS ad lib,0.005535822276595939
+5,Leptin,control restriction,HFHS restriction,0.5
+6,Leptin,HFHS ad lib,control ad lib,0.06918117094012531
+7,Leptin,HFHS ad lib,control restriction,0.005535822276595939
+8,Leptin,HFHS ad lib,HFHS restriction,0.0021317156915536613
+9,Leptin,HFHS restriction,control ad lib,0.02113005304197832
+10,Leptin,HFHS restriction,control restriction,0.5
+11,Leptin,HFHS restriction,HFHS ad lib,0.0021317156915536613
+12,Adiponectin,control ad lib,control restriction,0.002359099364057514
+13,Adiponectin,control ad lib,HFHS ad lib,0.08440061235227109
+14,Adiponectin,control ad lib,HFHS restriction,0.1656935481238075
+15,Adiponectin,control restriction,control ad lib,0.002359099364057514
+16,Adiponectin,control restriction,HFHS ad lib,0.10200408181033577
+17,Adiponectin,control restriction,HFHS restriction,0.006709328960248736
+18,Adiponectin,HFHS ad lib,control ad lib,0.08440061235227109
+19,Adiponectin,HFHS ad lib,control restriction,0.10200408181033577
+20,Adiponectin,HFHS ad lib,HFHS restriction,0.2293592793625111
+21,Adiponectin,HFHS restriction,control ad lib,0.1656935481238075
+22,Adiponectin,HFHS restriction,control restriction,0.006709328960248736
+23,Adiponectin,HFHS restriction,HFHS ad lib,0.2293592793625111
+24,Triglyceride,control ad lib,control restriction,0.5
+25,Triglyceride,control ad lib,HFHS ad lib,0.0005164877548034081
+26,Triglyceride,control ad lib,HFHS restriction,0.006709328960248736
+27,Triglyceride,control restriction,control ad lib,0.5
+28,Triglyceride,control restriction,HFHS ad lib,0.0005164877548034081
+29,Triglyceride,control restriction,HFHS restriction,0.002359099364057514
+30,Triglyceride,HFHS ad lib,control ad lib,0.0005164877548034081
+31,Triglyceride,HFHS ad lib,control restriction,0.0005164877548034081
+32,Triglyceride,HFHS ad lib,HFHS restriction,0.02836911068759672
+33,Triglyceride,HFHS restriction,control ad lib,0.006709328960248736
+34,Triglyceride,HFHS restriction,control restriction,0.002359099364057514
+35,Triglyceride,HFHS restriction,HFHS ad lib,0.02836911068759672
+36,liver_weight,control ad lib,control restriction,0.05598067713187416
+37,liver_weight,control ad lib,HFHS ad lib,0.0317890771704101
+38,liver_weight,control ad lib,HFHS restriction,0.36196601980698784
+39,liver_weight,control restriction,control ad lib,0.05598067713187416
+40,liver_weight,control restriction,HFHS ad lib,0.002942170307116614
+41,liver_weight,control restriction,HFHS restriction,0.07245639037335934
+42,liver_weight,HFHS ad lib,control ad lib,0.0317890771704101
+43,liver_weight,HFHS ad lib,control restriction,0.0029421703071166204
+44,liver_weight,HFHS ad lib,HFHS restriction,0.12144306757408263
+45,liver_weight,HFHS restriction,control ad lib,0.36196601980698784
+46,liver_weight,HFHS restriction,control restriction,0.07245639037335934
+47,liver_weight,HFHS restriction,HFHS ad lib,0.12144306757408263
