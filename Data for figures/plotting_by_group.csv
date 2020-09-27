@@ -1,0 +1,5 @@
+group,color,marker,line_type,hatches,hatch_colors,fill_color,label
+control ad lib,grey,o,-, ,grey,grey,CA
+control restriction,grey,v,--,/,grey,white,CR
+HFHS ad lib,red,o,-, ,red,red,HA
+HFHS restriction,red,v,--,/,red,white,HR

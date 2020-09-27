@@ -1,0 +1,36 @@
+Rat,diet,feeding
+1,control,ad lib
+2,control,ad lib
+3,control,ad lib
+4,control,ad lib
+5,control,ad lib
+6,control,ad lib
+7,control,ad lib
+8,control,ad lib
+9,control,ad lib
+10,control,restriction
+11,control,restriction
+12,control,restriction
+13,control,restriction
+14,control,restriction
+15,control,restriction
+16,control,restriction
+17,control,restriction
+18,control,restriction
+20,HFHS,ad lib
+21,HFHS,ad lib
+22,HFHS,ad lib
+23,HFHS,ad lib
+24,HFHS,ad lib
+25,HFHS,ad lib
+26,HFHS,ad lib
+27,HFHS,ad lib
+28,HFHS,restriction
+29,HFHS,restriction
+30,HFHS,restriction
+31,HFHS,restriction
+32,HFHS,restriction
+33,HFHS,restriction
+34,HFHS,restriction
+35,HFHS,restriction
+36,HFHS,restriction
