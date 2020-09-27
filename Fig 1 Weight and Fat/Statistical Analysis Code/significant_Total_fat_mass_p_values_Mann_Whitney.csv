@@ -1,0 +1,18 @@
+,Total Fat Mass,group1,group2,p_value
+0,total_fat_pad,control ad lib,HFHS ad lib,0.02818719601233587
+1,total_fat_pad,control ad lib,HFHS restriction,0.00850197092750677
+2,total_fat_pad,control restriction,HFHS ad lib,0.0055062894290718815
+3,total_fat_pad,control restriction,HFHS restriction,0.004019437313372977
+4,total_fat_pad,HFHS ad lib,control restriction,0.005506289429071882
+5,total_abdominal_fat,control ad lib,HFHS ad lib,0.0358675652723815
+6,total_abdominal_fat,control ad lib,HFHS restriction,0.010740598434360926
+7,total_abdominal_fat,control restriction,HFHS ad lib,0.014884579930018266
+8,total_abdominal_fat,control restriction,HFHS restriction,0.0023483760975352218
+9,total_abdominal_fat,HFHS ad lib,control ad lib,0.03586756527238153
+10,total_gonadal_fat,control ad lib,HFHS ad lib,0.009936767845410874
+11,total_gonadal_fat,control ad lib,HFHS restriction,0.012133743548053553
+12,total_gonadal_fat,control restriction,HFHS ad lib,0.005418142715665064
+13,total_gonadal_fat,control restriction,HFHS restriction,0.0034942205860011314
+14,liver_weight,control ad lib,HFHS ad lib,0.0317890771704101
+15,liver_weight,control restriction,HFHS ad lib,0.002942170307116614
+16,liver_weight,HFHS ad lib,control restriction,0.0029421703071166204

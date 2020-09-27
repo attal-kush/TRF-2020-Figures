@@ -1,0 +1,154 @@
+,Day,group1,group2,p_value
+0,18-Sep,control restriction,HFHS ad lib,0.036811086791971204
+1,19-Sep,control restriction,HFHS ad lib,0.037167770961247924
+2,20-Sep,control restriction,HFHS ad lib,0.026335713107882863
+3,21-Sep,control ad lib,HFHS ad lib,0.037078584142414085
+4,21-Sep,control restriction,HFHS ad lib,0.011360270219492725
+5,21-Sep,control restriction,HFHS restriction,0.006099870580000317
+6,22-Sep,control ad lib,HFHS ad lib,0.033418133572602475
+7,22-Sep,control restriction,HFHS ad lib,0.003915666832198256
+8,22-Sep,control restriction,HFHS restriction,0.018346571414636952
+9,23-Sep,control ad lib,HFHS ad lib,0.03006445564186529
+10,23-Sep,control ad lib,HFHS restriction,0.04619146816152361
+11,23-Sep,control restriction,HFHS ad lib,0.007845788586232201
+12,23-Sep,control restriction,HFHS restriction,0.014658311964023254
+13,24-Sep,control ad lib,HFHS ad lib,0.026924555167547784
+14,24-Sep,control restriction,HFHS ad lib,0.013209793940487831
+15,25-Sep,control ad lib,HFHS ad lib,0.021525911146651096
+16,25-Sep,control restriction,HFHS ad lib,0.0029108032666109026
+17,25-Sep,control restriction,HFHS restriction,0.025787184885813427
+18,26-Sep,control ad lib,HFHS ad lib,0.01042147003853218
+19,26-Sep,control ad lib,HFHS restriction,0.03150307681840539
+20,26-Sep,control restriction,HFHS ad lib,0.011487112214912063
+21,26-Sep,control restriction,HFHS restriction,0.020652888402933646
+22,27-Sep,control ad lib,HFHS ad lib,0.023994484114852867
+23,27-Sep,control ad lib,HFHS restriction,0.028557675889619518
+24,27-Sep,control restriction,HFHS restriction,0.02530398283235468
+25,28-Sep,control ad lib,HFHS ad lib,0.018570063117197645
+26,28-Sep,control ad lib,HFHS restriction,0.012023830554311355
+27,28-Sep,control restriction,HFHS ad lib,0.02385705078803809
+28,29-Sep,control ad lib,HFHS ad lib,0.033250270298456015
+29,29-Sep,control ad lib,HFHS restriction,0.02307526716369694
+30,29-Sep,control restriction,HFHS ad lib,0.03358607109209311
+31,29-Sep,control restriction,HFHS restriction,0.020917665654327566
+32,30-Sep,control ad lib,HFHS ad lib,0.016857381430781786
+33,30-Sep,control ad lib,HFHS restriction,0.01487059570459295
+34,30-Sep,control restriction,HFHS ad lib,0.03014327315226501
+35,30-Sep,control restriction,HFHS restriction,0.02097071576470926
+36,1-Oct,control ad lib,HFHS ad lib,0.005362591381958515
+37,1-Oct,control ad lib,HFHS restriction,0.00954835067432986
+38,1-Oct,control restriction,HFHS ad lib,0.00297200107466244
+39,1-Oct,control restriction,HFHS restriction,0.006566341263717257
+40,2-Oct,control ad lib,HFHS ad lib,0.00700998700314939
+41,2-Oct,control ad lib,HFHS restriction,0.010740598434360926
+42,2-Oct,control restriction,HFHS ad lib,0.002204064520445233
+43,2-Oct,control restriction,HFHS restriction,0.0030569057005338618
+44,3-Oct,control ad lib,HFHS restriction,0.021076909589827893
+45,3-Oct,control restriction,HFHS ad lib,0.005314515925812627
+46,3-Oct,control restriction,HFHS restriction,0.01680412984845723
+47,4-Oct,control ad lib,HFHS ad lib,0.010187470152601526
+48,4-Oct,control ad lib,HFHS restriction,0.006518988510966489
+49,4-Oct,control restriction,HFHS ad lib,0.004644020353592392
+50,4-Oct,control restriction,HFHS restriction,0.00850197092750677
+51,5-Oct,control ad lib,HFHS ad lib,0.014887619863968159
+52,5-Oct,control ad lib,HFHS restriction,0.008331481122773467
+53,5-Oct,control restriction,HFHS ad lib,0.0019135477960123604
+54,5-Oct,control restriction,HFHS restriction,0.003986926134027952
+55,6-Oct,control ad lib,HFHS ad lib,0.010265243256891682
+56,6-Oct,control ad lib,HFHS restriction,0.017034597572071968
+57,6-Oct,control restriction,HFHS restriction,0.006709328960248736
+58,7-Oct,control ad lib,HFHS ad lib,0.008808617739624857
+59,7-Oct,control ad lib,HFHS restriction,0.010774377668498517
+60,7-Oct,control restriction,HFHS ad lib,0.0029413154440729706
+61,7-Oct,control restriction,HFHS restriction,0.005880880316079937
+62,8-Oct,control ad lib,HFHS ad lib,0.02699830928378356
+63,8-Oct,control ad lib,HFHS restriction,0.015169394704348298
+64,8-Oct,control restriction,HFHS ad lib,0.006123906016451099
+65,8-Oct,control restriction,HFHS restriction,0.006685401185413613
+66,9-Oct,control ad lib,HFHS ad lib,0.015039276538875625
+67,9-Oct,control ad lib,HFHS restriction,0.011914274261315494
+68,9-Oct,control restriction,HFHS ad lib,0.0034746124522311503
+69,9-Oct,control restriction,HFHS restriction,0.005084010284199311
+70,10-Oct,control ad lib,HFHS ad lib,0.019043005316563468
+71,10-Oct,control ad lib,HFHS restriction,0.012097066413512715
+72,10-Oct,control restriction,HFHS ad lib,0.004622413459686993
+73,10-Oct,control restriction,HFHS restriction,0.0035088888230085636
+74,11-Oct,control ad lib,HFHS ad lib,0.00800736625821595
+75,11-Oct,control ad lib,HFHS restriction,0.008530525537756697
+76,11-Oct,control restriction,HFHS restriction,0.005202293681764547
+77,12-Oct,control ad lib,HFHS ad lib,0.0242009226023292
+78,12-Oct,control ad lib,HFHS restriction,0.013518640465255742
+79,12-Oct,control restriction,HFHS ad lib,0.007068984727955742
+80,12-Oct,control restriction,HFHS restriction,0.005902656590318422
+81,13-Oct,control ad lib,HFHS restriction,0.013558285679459308
+82,13-Oct,control restriction,HFHS ad lib,0.0079102512024143
+83,14-Oct,control ad lib,HFHS ad lib,0.03367006711412767
+84,14-Oct,control ad lib,HFHS restriction,0.013597969519917028
+85,14-Oct,control restriction,HFHS ad lib,0.01508993518896322
+86,15-Oct,control ad lib,HFHS restriction,0.018889453169599873
+87,15-Oct,control restriction,HFHS ad lib,0.0034919689675827494
+88,15-Oct,control restriction,HFHS restriction,0.005222135550685113
+89,16-Oct,control ad lib,HFHS ad lib,0.026777144765347167
+90,16-Oct,control ad lib,HFHS restriction,0.0169884324746683
+91,16-Oct,control restriction,HFHS ad lib,0.004050732235709882
+92,16-Oct,control restriction,HFHS restriction,0.004019437313372977
+93,17-Oct,control ad lib,HFHS ad lib,0.04153778512598796
+94,17-Oct,control restriction,HFHS ad lib,0.001611052539286516
+95,17-Oct,control restriction,HFHS restriction,0.003954550616797019
+96,18-Oct,control ad lib,HFHS ad lib,0.03698940768891652
+97,18-Oct,control ad lib,HFHS restriction,0.03477097369436934
+98,18-Oct,control restriction,HFHS ad lib,0.0016396118888942503
+99,18-Oct,control restriction,HFHS restriction,0.00304371629233204
+100,19-Oct,control ad lib,HFHS ad lib,0.0270720956996846
+101,19-Oct,control ad lib,HFHS restriction,0.0385414440766041
+102,19-Oct,control restriction,HFHS ad lib,0.0016684702536990444
+103,19-Oct,control restriction,HFHS restriction,0.0017843142184666935
+104,20-Oct,control ad lib,control restriction,0.028622066830972296
+105,20-Oct,control restriction,HFHS ad lib,0.001203435010596002
+106,20-Oct,control restriction,HFHS restriction,0.0026814013889709496
+107,21-Oct,control restriction,HFHS ad lib,0.0022529926337705366
+108,21-Oct,control restriction,HFHS restriction,0.008444981110559378
+109,22-Oct,control restriction,HFHS ad lib,0.0012108870108563864
+110,22-Oct,control restriction,HFHS restriction,0.0045588910574887375
+111,23-Oct,control ad lib,HFHS ad lib,0.030300984856003035
+112,23-Oct,control restriction,HFHS ad lib,0.00031775396212345625
+113,23-Oct,control restriction,HFHS restriction,0.00020614740103084563
+114,24-Oct,control ad lib,control restriction,0.016528762474502606
+115,24-Oct,control ad lib,HFHS ad lib,0.04589734725512743
+116,24-Oct,control restriction,HFHS ad lib,0.001024688035719357
+117,24-Oct,control restriction,HFHS restriction,0.0009775343985548937
+118,25-Oct,control ad lib,control restriction,0.031639753570427476
+119,25-Oct,control restriction,HFHS ad lib,0.0012183674044945047
+120,25-Oct,control restriction,HFHS restriction,0.00024174863934919313
+121,26-Oct,control ad lib,HFHS restriction,0.046529745278287724
+122,26-Oct,control restriction,HFHS ad lib,0.000527061454925138
+123,26-Oct,control restriction,HFHS restriction,0.00028120056911038653
+124,27-Oct,control ad lib,control restriction,0.023358766474108537
+125,27-Oct,control ad lib,HFHS restriction,0.03184488756831434
+126,27-Oct,control restriction,HFHS ad lib,0.00044719374476459
+127,27-Oct,control restriction,HFHS restriction,0.0002047300544265788
+128,28-Oct,control ad lib,control restriction,0.046614295251386724
+129,28-Oct,control ad lib,HFHS restriction,0.02596879786197251
+130,28-Oct,control restriction,HFHS restriction,0.0004614374988130994
+131,29-Oct,control ad lib,control restriction,0.021023797120357107
+132,29-Oct,control restriction,HFHS ad lib,0.0008763194415073017
+133,29-Oct,control restriction,HFHS restriction,0.000850621287005042
+134,30-Oct,control ad lib,control restriction,0.009610533626632459
+135,30-Oct,control restriction,HFHS ad lib,0.0006330852714512845
+136,30-Oct,control restriction,HFHS restriction,0.00028681675549428065
+137,31-Oct,control ad lib,control restriction,0.010842055682495997
+138,31-Oct,control ad lib,HFHS ad lib,0.029985664003555637
+139,31-Oct,control restriction,HFHS restriction,0.0005431233129110169
+140,1-Nov,control restriction,HFHS ad lib,0.0008706055909285653
+141,3-Nov,control ad lib,control restriction,0.025908235684109524
+142,3-Nov,control ad lib,HFHS restriction,0.04238355448835526
+143,3-Nov,control restriction,HFHS restriction,0.0013330488232649095
+144,6-Nov,control ad lib,control restriction,0.03170811585927005
+145,6-Nov,control restriction,HFHS ad lib,0.0022653203381679896
+146,6-Nov,control restriction,HFHS restriction,0.002359099364057514
+147,7-Nov,control restriction,HFHS ad lib,0.0030338920618032113
+148,7-Nov,control restriction,HFHS restriction,0.0017757324038530362
+149,8-Nov,control restriction,HFHS ad lib,0.0022162391385341764
+150,8-Nov,control restriction,HFHS restriction,0.002034345970279693
+151,9-Nov,control restriction,HFHS ad lib,0.0035093711420864696
+152,9-Nov,control restriction,HFHS restriction,0.0030966590870221385

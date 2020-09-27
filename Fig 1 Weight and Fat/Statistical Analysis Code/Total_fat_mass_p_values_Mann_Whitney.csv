@@ -1,0 +1,49 @@
+,Total Fat Mass,group1,group2,p_value
+0,total_fat_pad,control ad lib,control restriction,0.36189765707468813
+1,total_fat_pad,control ad lib,HFHS ad lib,0.02818719601233587
+2,total_fat_pad,control ad lib,HFHS restriction,0.00850197092750677
+3,total_fat_pad,control restriction,control ad lib,0.36189765707468813
+4,total_fat_pad,control restriction,HFHS ad lib,0.0055062894290718815
+5,total_fat_pad,control restriction,HFHS restriction,0.004019437313372977
+6,total_fat_pad,HFHS ad lib,control ad lib,0.02818719601233587
+7,total_fat_pad,HFHS ad lib,control restriction,0.005506289429071882
+8,total_fat_pad,HFHS ad lib,HFHS restriction,0.33599993550481
+9,total_fat_pad,HFHS restriction,control ad lib,0.00850197092750677
+10,total_fat_pad,HFHS restriction,control restriction,0.004019437313372977
+11,total_fat_pad,HFHS restriction,HFHS ad lib,0.33599993550481
+12,total_abdominal_fat,control ad lib,control restriction,0.39543529406838573
+13,total_abdominal_fat,control ad lib,HFHS ad lib,0.0358675652723815
+14,total_abdominal_fat,control ad lib,HFHS restriction,0.010740598434360926
+15,total_abdominal_fat,control restriction,control ad lib,0.39543529406838573
+16,total_abdominal_fat,control restriction,HFHS ad lib,0.014884579930018266
+17,total_abdominal_fat,control restriction,HFHS restriction,0.0023483760975352218
+18,total_abdominal_fat,HFHS ad lib,control ad lib,0.03586756527238153
+19,total_abdominal_fat,HFHS ad lib,control restriction,0.014884579930018266
+20,total_abdominal_fat,HFHS ad lib,HFHS restriction,0.41616958845239155
+21,total_abdominal_fat,HFHS restriction,control ad lib,0.010740598434360926
+22,total_abdominal_fat,HFHS restriction,control restriction,0.0023483760975352218
+23,total_abdominal_fat,HFHS restriction,HFHS ad lib,0.41616958845239155
+24,total_gonadal_fat,control ad lib,control restriction,0.4823096976815231
+25,total_gonadal_fat,control ad lib,HFHS ad lib,0.009936767845410874
+26,total_gonadal_fat,control ad lib,HFHS restriction,0.012133743548053553
+27,total_gonadal_fat,control restriction,control ad lib,0.4823096976815231
+28,total_gonadal_fat,control restriction,HFHS ad lib,0.005418142715665064
+29,total_gonadal_fat,control restriction,HFHS restriction,0.0034942205860011314
+30,total_gonadal_fat,HFHS ad lib,control ad lib,0.009936767845410874
+31,total_gonadal_fat,HFHS ad lib,control restriction,0.005418142715665064
+32,total_gonadal_fat,HFHS ad lib,HFHS restriction,0.298043428987244
+33,total_gonadal_fat,HFHS restriction,control ad lib,0.012133743548053553
+34,total_gonadal_fat,HFHS restriction,control restriction,0.0034942205860011314
+35,total_gonadal_fat,HFHS restriction,HFHS ad lib,0.298043428987244
+36,liver_weight,control ad lib,control restriction,0.05598067713187416
+37,liver_weight,control ad lib,HFHS ad lib,0.0317890771704101
+38,liver_weight,control ad lib,HFHS restriction,0.36196601980698784
+39,liver_weight,control restriction,control ad lib,0.05598067713187416
+40,liver_weight,control restriction,HFHS ad lib,0.002942170307116614
+41,liver_weight,control restriction,HFHS restriction,0.07245639037335934
+42,liver_weight,HFHS ad lib,control ad lib,0.0317890771704101
+43,liver_weight,HFHS ad lib,control restriction,0.0029421703071166204
+44,liver_weight,HFHS ad lib,HFHS restriction,0.12144306757408263
+45,liver_weight,HFHS restriction,control ad lib,0.36196601980698784
+46,liver_weight,HFHS restriction,control restriction,0.07245639037335934
+47,liver_weight,HFHS restriction,HFHS ad lib,0.12144306757408263
