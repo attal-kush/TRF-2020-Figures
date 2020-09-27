@@ -1,0 +1,145 @@
+,gene,group1,group2,p_value
+0,CART,control ad lib,control restriction,0.12507650397969117
+1,CART,control ad lib,HFHS ad lib,0.3085375387259869
+2,CART,control ad lib,HFHS restriction,0.41516212882789766
+3,CART,control restriction,control ad lib,0.12507650397969117
+4,CART,control restriction,HFHS ad lib,0.14198838587545587
+5,CART,control restriction,HFHS restriction,0.17655561725300278
+6,CART,HFHS ad lib,control ad lib,0.3085375387259869
+7,CART,HFHS ad lib,control restriction,0.14198838587545587
+8,CART,HFHS ad lib,HFHS restriction,0.40509061820523684
+9,CART,HFHS restriction,control ad lib,0.41516212882789766
+10,CART,HFHS restriction,control restriction,0.17655561725300278
+11,CART,HFHS restriction,HFHS ad lib,0.40509061820523684
+12,NPY,control ad lib,control restriction,0.3046400796520514
+13,NPY,control ad lib,HFHS ad lib,0.41516212882789766
+14,NPY,control ad lib,HFHS restriction,0.08736791160762358
+15,NPY,control restriction,control ad lib,0.3046400796520514
+16,NPY,control restriction,HFHS ad lib,0.11231931946189022
+17,NPY,control restriction,HFHS restriction,0.02689204443119914
+18,NPY,HFHS ad lib,control ad lib,0.41516212882789766
+19,NPY,HFHS ad lib,control restriction,0.11231931946189022
+20,NPY,HFHS ad lib,HFHS restriction,0.1489765308040839
+21,NPY,HFHS restriction,control ad lib,0.08736791160762358
+22,NPY,HFHS restriction,control restriction,0.02689204443119914
+23,NPY,HFHS restriction,HFHS ad lib,0.1489765308040839
+24,AgRP,control ad lib,control restriction,0.3046400796520514
+25,AgRP,control ad lib,HFHS ad lib,0.47152833548352147
+26,AgRP,control ad lib,HFHS restriction,0.3604924309508354
+27,AgRP,control restriction,control ad lib,0.3046400796520514
+28,AgRP,control restriction,HFHS ad lib,0.3604924309508354
+29,AgRP,control restriction,HFHS restriction,0.47152833548352147
+30,AgRP,HFHS ad lib,control ad lib,0.47152833548352147
+31,AgRP,HFHS ad lib,control restriction,0.3604924309508354
+32,AgRP,HFHS ad lib,HFHS restriction,0.40509061820523684
+33,AgRP,HFHS restriction,control ad lib,0.3604924309508354
+34,AgRP,HFHS restriction,control restriction,0.47152833548352147
+35,AgRP,HFHS restriction,HFHS ad lib,0.40509061820523684
+36,GLP1R,control ad lib,control restriction,0.5
+37,GLP1R,control ad lib,HFHS ad lib,0.06680720126885807
+38,GLP1R,control ad lib,HFHS restriction,0.21601744600250378
+39,GLP1R,control restriction,control ad lib,0.5
+40,GLP1R,control restriction,HFHS ad lib,0.013404565357797922
+41,GLP1R,control restriction,HFHS restriction,0.11231931946189022
+42,GLP1R,HFHS ad lib,control ad lib,0.06680720126885807
+43,GLP1R,HFHS ad lib,control restriction,0.013404565357797922
+44,GLP1R,HFHS ad lib,HFHS restriction,0.28758676596009836
+45,GLP1R,HFHS restriction,control ad lib,0.21601744600250378
+46,GLP1R,HFHS restriction,control restriction,0.11231931946189022
+47,GLP1R,HFHS restriction,HFHS ad lib,0.28758676596009836
+48,Npy2R,control ad lib,control restriction,0.18554668476134878
+49,Npy2R,control ad lib,HFHS ad lib,0.11231931946189022
+50,Npy2R,control ad lib,HFHS restriction,0.08736791160762358
+51,Npy2R,control restriction,control ad lib,0.18554668476134878
+52,Npy2R,control restriction,HFHS ad lib,0.47152833548352147
+53,Npy2R,control restriction,HFHS restriction,0.3604924309508354
+54,Npy2R,HFHS ad lib,control ad lib,0.11231931946189022
+55,Npy2R,HFHS ad lib,control restriction,0.47152833548352147
+56,Npy2R,HFHS ad lib,HFHS restriction,0.28758676596009836
+57,Npy2R,HFHS restriction,control ad lib,0.08736791160762358
+58,Npy2R,HFHS restriction,control restriction,0.3604924309508354
+59,Npy2R,HFHS restriction,HFHS ad lib,0.28758676596009836
+60,Ghsr,control ad lib,control restriction,0.03681913506015133
+61,Ghsr,control ad lib,HFHS ad lib,0.2601584002536833
+62,Ghsr,control ad lib,HFHS restriction,0.05020624699305142
+63,Ghsr,control restriction,control ad lib,0.03681913506015133
+64,Ghsr,control restriction,HFHS ad lib,0.06680720126885807
+65,Ghsr,control restriction,HFHS restriction,0.47152833548352147
+66,Ghsr,HFHS ad lib,control ad lib,0.2601584002536833
+67,Ghsr,HFHS ad lib,control restriction,0.06680720126885807
+68,Ghsr,HFHS ad lib,HFHS restriction,0.08674273416073924
+69,Ghsr,HFHS restriction,control ad lib,0.05020624699305142
+70,Ghsr,HFHS restriction,control restriction,0.47152833548352147
+71,Ghsr,HFHS restriction,HFHS ad lib,0.08674273416073924
+72,Insr,control ad lib,control restriction,0.04834878380881808
+73,Insr,control ad lib,HFHS ad lib,0.06680720126885807
+74,Insr,control ad lib,HFHS restriction,0.006209665325776132
+75,Insr,control restriction,control ad lib,0.04834878380881808
+76,Insr,control restriction,HFHS ad lib,0.41516212882789766
+77,Insr,control restriction,HFHS restriction,0.02689204443119914
+78,Insr,HFHS ad lib,control ad lib,0.06680720126885807
+79,Insr,HFHS ad lib,control restriction,0.41516212882789766
+80,Insr,HFHS ad lib,HFHS restriction,0.046347901278906284
+81,Insr,HFHS restriction,control ad lib,0.006209665325776132
+82,Insr,HFHS restriction,control restriction,0.02689204443119914
+83,Insr,HFHS restriction,HFHS ad lib,0.046347901278906284
+84,Lepr,control ad lib,control restriction,0.010725366843161034
+85,Lepr,control ad lib,HFHS ad lib,0.06680720126885807
+86,Lepr,control ad lib,HFHS restriction,0.41516212882789766
+87,Lepr,control restriction,control ad lib,0.010725366843161034
+88,Lepr,control restriction,HFHS ad lib,0.17655561725300278
+89,Lepr,control restriction,HFHS restriction,0.08736791160762358
+90,Lepr,HFHS ad lib,control ad lib,0.06680720126885807
+91,Lepr,HFHS ad lib,control restriction,0.17655561725300278
+92,Lepr,HFHS ad lib,HFHS restriction,0.28758676596009836
+93,Lepr,HFHS restriction,control ad lib,0.41516212882789766
+94,Lepr,HFHS restriction,control restriction,0.08736791160762358
+95,Lepr,HFHS restriction,HFHS ad lib,0.28758676596009836
+96,MC4R,control ad lib,control restriction,0.0799320987739866
+97,MC4R,control ad lib,HFHS ad lib,0.11231931946189022
+98,MC4R,control ad lib,HFHS restriction,0.3085375387259869
+99,MC4R,control restriction,control ad lib,0.0799320987739866
+100,MC4R,control restriction,HFHS ad lib,0.2601584002536833
+101,MC4R,control restriction,HFHS restriction,0.21601744600250378
+102,MC4R,HFHS ad lib,control ad lib,0.11231931946189022
+103,MC4R,HFHS ad lib,control restriction,0.2601584002536833
+104,MC4R,HFHS ad lib,HFHS restriction,0.3444602779022303
+105,MC4R,HFHS restriction,control ad lib,0.3085375387259869
+106,MC4R,HFHS restriction,control restriction,0.21601744600250378
+107,MC4R,HFHS restriction,HFHS ad lib,0.3444602779022303
+108,Cckar,control ad lib,control restriction,0.3991489236642632
+109,Cckar,control ad lib,HFHS ad lib,0.14198838587545587
+110,Cckar,control ad lib,HFHS restriction,0.3085375387259869
+111,Cckar,control restriction,control ad lib,0.3991489236642632
+112,Cckar,control restriction,HFHS ad lib,0.17655561725300278
+113,Cckar,control restriction,HFHS restriction,0.47152833548352147
+114,Cckar,HFHS ad lib,control ad lib,0.14198838587545587
+115,Cckar,HFHS ad lib,control restriction,0.17655561725300278
+116,Cckar,HFHS ad lib,HFHS restriction,0.1489765308040839
+117,Cckar,HFHS restriction,control ad lib,0.3085375387259869
+118,Cckar,HFHS restriction,control restriction,0.47152833548352147
+119,Cckar,HFHS restriction,HFHS ad lib,0.1489765308040839
+120,Cckbr,control ad lib,control restriction,0.5
+121,Cckbr,control ad lib,HFHS ad lib,0.08736791160762358
+122,Cckbr,control ad lib,HFHS restriction,0.3604924309508354
+123,Cckbr,control restriction,control ad lib,0.5
+124,Cckbr,control restriction,HFHS ad lib,0.05020624699305142
+125,Cckbr,control restriction,HFHS restriction,0.14198838587545587
+126,Cckbr,HFHS ad lib,control ad lib,0.08736791160762358
+127,Cckbr,HFHS ad lib,control restriction,0.05020624699305142
+128,Cckbr,HFHS ad lib,HFHS restriction,0.23558499924502785
+129,Cckbr,HFHS restriction,control ad lib,0.3604924309508354
+130,Cckbr,HFHS restriction,control restriction,0.14198838587545587
+131,Cckbr,HFHS restriction,HFHS ad lib,0.23558499924502785
+132,Oxtr,control ad lib,control restriction,0.15334253295209033
+133,Oxtr,control ad lib,HFHS ad lib,0.3085375387259869
+134,Oxtr,control ad lib,HFHS restriction,0.08736791160762358
+135,Oxtr,control restriction,control ad lib,0.15334253295209033
+136,Oxtr,control restriction,HFHS ad lib,0.3604924309508354
+137,Oxtr,control restriction,HFHS restriction,0.47152833548352147
+138,Oxtr,HFHS ad lib,control ad lib,0.3085375387259869
+139,Oxtr,HFHS ad lib,control restriction,0.3604924309508354
+140,Oxtr,HFHS ad lib,HFHS restriction,0.23558499924502785
+141,Oxtr,HFHS restriction,control ad lib,0.08736791160762358
+142,Oxtr,HFHS restriction,control restriction,0.47152833548352147
+143,Oxtr,HFHS restriction,HFHS ad lib,0.23558499924502785

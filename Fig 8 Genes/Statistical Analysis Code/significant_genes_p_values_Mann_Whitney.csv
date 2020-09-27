@@ -1,0 +1,8 @@
+,gene,group1,group2,p_value
+0,NPY,control restriction,HFHS restriction,0.02689204443119914
+1,GLP1R,control restriction,HFHS ad lib,0.013404565357797922
+2,Ghsr,control ad lib,control restriction,0.03681913506015133
+3,Insr,control ad lib,control restriction,0.04834878380881808
+4,Insr,control ad lib,HFHS restriction,0.006209665325776132
+5,Insr,HFHS ad lib,HFHS restriction,0.046347901278906284
+6,Lepr,control ad lib,control restriction,0.010725366843161034
