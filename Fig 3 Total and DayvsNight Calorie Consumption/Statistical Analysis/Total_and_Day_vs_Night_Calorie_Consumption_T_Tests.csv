@@ -1,0 +1,5 @@
+,group1,group2,t-statistic,p-value
+0,control ad lib,control restriction,4.0606025837350215,0.0010249925979626737
+1,HFHS ad lib,HFHS restriction,2.2119548631842383,0.051390245227183336
+2,Control ad lib Day,Control ad lib Night,-4.773542620353987,0.00029698205915948243
+3,HFHS ad lib Day,HFHS ad lib Night,-5.080586767519567,0.0009524383965375415
