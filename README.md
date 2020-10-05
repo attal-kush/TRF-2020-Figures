@@ -6,5 +6,5 @@ To generate figures 3, 4, and 5 from the manuscript, follow 2 steps:
 1. Use *requirements.txt* to download the proper versions of all libraries needed to run the scripts. These scripts were created using Python version **3.8.6**, so **ensure Python version 3.8.6 (or newer) is installed**
 2. Run *figures_and_analysis.py*
 
-Raw video data is located in "Data for Figures". To recreate the binary ZIP archives for feeding and sucrose activity, complete Step 1 from above and run *Creating_Binary_CSV_Files.py* located in "Data for Figures"
+Raw video data is located in "Data for Figures". To recreate the ZIP archives for feeding and sucrose binary activity, complete Step 1 from above and run *Creating_Binary_CSV_Files.py* located in "Data for Figures"
 
