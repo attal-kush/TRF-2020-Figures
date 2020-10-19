@@ -8,4 +8,3 @@ This repository contains the raw data and Python scripts needed to reproduce fig
 3. Run *figures_and_analysis.py* without making any changes to source code. Results will be located in a newly-created directory labeled *Figures_And_Analysis*, which itself will be created inside this folder *TRF-2020-Figures*
 
 Raw video data and ZIP archives for feeding and sucrose binary activity are located in *Data for Figures*. To recreate the ZIP archives for feeding and sucrose binary activity, check the **README** located in the folder *Data for Figures*. 
-
