@@ -488,7 +488,7 @@ if not os.path.exists("Figures_And_Analysis"):
 plot_parameters = pd.read_csv("Data for figures/plotting_by_group.csv", index_col=0)
 
 # Download raw Body Weight Data
-body_weight = pd.read_csv("Data for figures/2018VT - final weight log.csv")
+body_weight = pd.read_csv("Data for figures/2018VT - daily weight log.csv")
 
 # Create metafile that holds group information for ALL rats
 plot_body_weight = body_weight.T
