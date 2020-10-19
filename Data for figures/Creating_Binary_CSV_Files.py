@@ -1,5 +1,7 @@
 # Creating CSV Files of Feeding and Sucrose Activity
-# Used to create binary CSV files for Fig. 3 through 7 in Time-Restricted Feeding in the Active Phase Drives Periods of Rapid Food Consumption in Rats Fed a High-Fat, High-Sugar Diet with Liquid Sucrose by Kush Attal, Julia Wickman Shihoko Kojima, Sarah N. Blythe, Natalia Toporikova
+# Used to create binary CSV files for Fig. 3 through 7 in
+# Time-Restricted Feeding in the Active Phase Drives Periods of Rapid Food Consumption in Rats Fed a High-Fat, High-Sugar Diet with Liquid Sucrose
+# by Kush Attal, Julia Wickman Shihoko Kojima, Sarah N. Blythe, Natalia Toporikova
 
 
 #----------------------------------------------------------
