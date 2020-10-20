@@ -237,7 +237,7 @@ df = light_summary(df, hfhs_adlib_feeding)
 df = light_summary(df, hfhs_restr_feeding)
 
 # Create metafile that holds group information
-body_weight = pd.read_csv("2018VT - final weight log.csv").T
+body_weight = pd.read_csv("2018VT - daily weight log.csv").T
 body_weight.columns = body_weight.iloc[0]
 metafile = body_weight.iloc[1:3].T
 
