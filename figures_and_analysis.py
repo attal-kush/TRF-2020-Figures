@@ -552,7 +552,9 @@ Fig1A_timeplot(metafile, plot_body_weight)
 plt.annotate('*', (4.4, 80), fontsize=15, color = 'black', fontweight='bold')
 plt.annotate('#', (44.2, 365), fontsize=10, color = 'gray', fontweight='bold')
 # Subplot Text Label
-plt.text(-7.5, 380, 'A', fontsize=15, fontweight='bold')
+plt.figtext(0.03, 0.93, "A", fontsize = 15, color = "black", fontweight = "bold")
+
+#plt.text(-7.5, 380, 'A', fontsize=15, fontweight='bold')
 
 # Create Fig1B subplot
 plt.subplot(1,2,2)
@@ -560,7 +562,9 @@ Fig1B_boxplot(master_data.set_index("Rat"), plot_parameters)
 # Significance Markers
 plt.annotate('*', (1.96, 26.8), fontsize=15, color = 'black', fontweight='bold')
 # Subplot Text Label
-plt.text(-0.8, 28, 'B', fontsize=15, fontweight='bold')
+plt.figtext(0.52, 0.93, "B", fontsize = 15, color = "black", fontweight = "bold")
+
+#plt.text(-0.8, 28, 'B', fontsize=15, fontweight='bold')
 
 # Clean up and save the figure
 sns.despine()
@@ -918,7 +922,7 @@ final_barplot_plot_parameters = plot_parameters.reindex(["control ad lib", "HFHS
 final_barplot_plot_parameters["edgecolors"] = ["grey", "red"]
 
 # Figure 5 Size
-plt.figure(figsize=(3.75, 2.5))
+plt.figure(figsize=(3.543, 2.5))
 
 # Final 3 Hours
 Fig5_barplot(final_feeding_frame, "Time Spent Feeding (sec)", final_barplot_plot_parameters)
@@ -946,7 +950,7 @@ result.to_csv("Figures_and_Analysis/Fig5_ANOVA_and_TukeyHSD.csv")
 # Figure6 Generation
 #----------------------------------------------------------
 # Figure 6 Size
-plt.figure(figsize = (3.75, 7))
+plt.figure(figsize = (3.543, 7))
 
 # Fig6A - HFHS AdLib
 plt.subplot(3, 1, 1)
@@ -957,7 +961,7 @@ plt.xticks([])
 
 # Remove leading 0
 plt.gca().yaxis.get_major_ticks()[0].label1.set_visible(False)
-plt.figtext(0.03, 0.97, "A", fontsize = 15, color = "black", fontweight = "bold")
+plt.figtext(0.04, 0.97, "A", fontsize = 15, color = "black", fontweight = "bold")
 
 # Fig6B - HFHS Restriction
 plt.subplot(3, 1, 2)
@@ -968,7 +972,7 @@ plt.xticks([])
 
 ## Remove leading 0
 plt.gca().yaxis.get_major_ticks()[0].label1.set_visible(False)
-plt.figtext(0.03, 0.67, "B", fontsize = 15, color = "black", fontweight = "bold")
+plt.figtext(0.04, 0.67, "B", fontsize = 15, color = "black", fontweight = "bold")
 
 # HFHS Restrited - Binge
 plt.subplot(3, 1, 3)
@@ -976,7 +980,7 @@ Fig6C_timeplot(sucrose_hourly_frame.T.iloc[:-1, :], "HFHS restriction", "red", v
 # Significance Markers
 plt.annotate('*', (3.7, 45), fontsize=15, color = 'black', fontweight='bold')
 plt.annotate('*', (5.7, 75), fontsize=15, color = 'black', fontweight='bold')
-plt.figtext(0.03, 0.36, "C", fontsize = 15, color = "black", fontweight = "bold")
+plt.figtext(0.04, 0.36, "C", fontsize = 15, color = "black", fontweight = "bold")
 plt.savefig("Figures_And_Analysis/Fig6.tif", dpi = 1000)
 
 
@@ -1039,7 +1043,7 @@ final_barplot_plot_parameters = plot_parameters.reindex(["control ad lib", "cont
 final_barplot_plot_parameters["edgecolors"] = ["darkred", "red"]
 
 # Figure 7 Size
-plt.figure(figsize=(3.75, 2.5))
+plt.figure(figsize=(3.543, 2.5))
 
 # Final 3 Hours
 Fig7_barplot(final_sucrose_frame, "Time Spent Drinking \nSucrose (sec)", final_barplot_plot_parameters)
