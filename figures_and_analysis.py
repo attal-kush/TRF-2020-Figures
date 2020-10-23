@@ -235,7 +235,7 @@ def Fig4AD_timeplot(diet_column, color, linestyle, ymax=0.4, ylabel = "Normalize
     
     # Add x- and y-labels, ticks, and units
     plt.yticks(fontname = 'Arial', fontsize=10, color = 'black')
-    plt.ylabel(ylabel, color = 'black', fontname = 'Arial', fontsize=12, fontweight='bold')
+    plt.ylabel(ylabel, color = 'black', fontname = 'Arial', fontsize=10, fontweight='bold')
     plt.ylim(0, ymax)
     plt.xlim('1970-01-01 21:00:00.000', '1970-01-02 21:00:00.000')
     plt.xlabel('Time (hr)', fontname = 'Arial', fontsize=10, fontweight='bold', color = 'black')
@@ -329,7 +329,7 @@ def Fig6AB_timeplot(diet_column, color, linestyle, ymax=0.08, ylabel = "Normaliz
     
     # Add x- and y-labels, ticks, and units
     plt.yticks(fontname = 'Arial', fontsize=10, color = 'black')
-    plt.ylabel(ylabel, color = 'black', fontname = 'Arial', fontsize=12, fontweight='bold')
+    plt.ylabel(ylabel, color = 'black', fontname = 'Arial', fontsize=10, fontweight='bold')
     plt.ylim(0, ymax)
     plt.xlim('1970-01-01 21:00:00.000', '1970-01-02 21:00:00.000')
     plt.xlabel('Time (hr)', fontname = 'Arial', fontsize=10, fontweight='bold', color = 'black')
