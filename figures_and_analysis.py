@@ -3,6 +3,9 @@
 # Time-Restricted Feeding in the Active Phase Drives Periods of Rapid Food Consumption in Rats Fed a High-Fat, High-Sugar Diet with Liquid Sucrose 
 # by Kush Attal, Julia Wickman Shihoko Kojima, Sarah N. Blythe, Natalia Toporikova
 
+# In[1]:
+
+
 #----------------------------------------------------------
 # Import libraries
 #----------------------------------------------------------
@@ -36,6 +39,9 @@ plt.rcParams['figure.dpi'] = 1000
 #----------------------------------------------------------
 if sys.version < "3.8.2":
     raise Exception("Must be using Python 3.8.2 or newer")
+
+
+# In[2]:
 
 
 #----------------------------------------------------------
@@ -454,11 +460,17 @@ def make_gene_legend():
     return()
 
 
+# In[3]:
+
+
 #----------------------------------------------------------
 # Create Directory to Hold Figures In
 #----------------------------------------------------------
 if not os.path.exists("Figures_And_Analysis"):
     os.mkdir("Figures_And_Analysis")
+
+
+# In[4]:
 
 
 #----------------------------------------------------------
@@ -513,6 +525,9 @@ sucrose_hourly_frame = pd.read_csv(sucrose_archive.open('sucrose_total_by_hour.c
 
 # Download gene data
 gene_data = pd.read_csv("Data for figures/qPCR_normalized_gapdph.csv", index_col=0)
+
+
+# In[5]:
 
 
 #----------------------------------------------------------
@@ -590,6 +605,9 @@ plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=0.6, hs
 plt.savefig('Figures_And_Analysis/Fig1.tif', dpi = 1000)
 
 
+# In[6]:
+
+
 #----------------------------------------------------------
 # Figure1 Statistical Analysis
 #----------------------------------------------------------
@@ -649,6 +667,9 @@ for group in metabolites_hormones:
 
 # Send Results to CSV File
 metabolite_results.fillna("").rename(index={0:'', 1:'', 2:'', 3:'', 4:'', 5:''}).to_csv("Figures_And_Analysis/Fig1CtoF_ANOVA_and_Tukey.csv")
+
+
+# In[7]:
 
 
 #----------------------------------------------------------
@@ -723,6 +744,9 @@ plt.annotate('a', (0.45, 4600), fontsize=10, color = 'black', fontweight='bold')
 plt.savefig('Figures_And_Analysis/Fig2.tif', dpi = 1000)
 
 
+# In[8]:
+
+
 #----------------------------------------------------------
 # Figure2 Statistical Analysis
 #----------------------------------------------------------
@@ -758,6 +782,9 @@ results.loc[5] = ["control ad lib Night Ratio", "HFHS ad lib Night Ratio", t, p]
 results.set_index("group1").to_csv("Figures_And_Analysis/Fig2_T_Tests.csv")
 
 
+# In[9]:
+
+
 #----------------------------------------------------------
 # Figure3G Dataframe Generation
 #----------------------------------------------------------
@@ -790,6 +817,9 @@ final_feeding_frame = final_feeding_frame.dropna()
 final_barplot_plot_parameters = plot_parameters.reindex(["control ad lib", "HFHS ad lib", "control restriction", "HFHS restriction"]).iloc[-2:]
 # Add custom edge colors
 final_barplot_plot_parameters["edgecolors"] = ["grey", "red"]
+
+
+# In[23]:
 
 
 #----------------------------------------------------------
@@ -884,9 +914,12 @@ plt.figtext(0.04, 0.28, "G", fontsize = 15, color = "black", fontweight = "bold"
 # Despine subplot
 ax.spines["right"].set_visible(False)
 ax.spines["top"].set_visible(False)
-plt.subplots_adjust(wspace=0.15)
+plt.subplots_adjust(wspace=0.15, hspace=None)
 
-plt.savefig("Figures_And_Analysis/Fig3.tif", dpi = 1000)
+plt.savefig("Figures_And_Analysis/Fig3.tif", dpi = 1000, bbox_inches="tight")
+
+
+# In[247]:
 
 
 #----------------------------------------------------------
@@ -916,6 +949,9 @@ first_hour_results.set_index("diet").to_csv("Figures_and_Analysis/Fig3AtoF_T_Tes
 result = activity_anova(final_feeding_frame)
 
 result.to_csv("Figures_and_Analysis/Fig3G_ANOVA_and_TukeyHSD.csv")
+
+
+# In[25]:
 
 
 #----------------------------------------------------------
@@ -950,6 +986,9 @@ final_sucrose_frame = final_sucrose_frame.dropna()
 final_barplot_plot_parameters = plot_parameters.reindex(["control ad lib", "control restriction", "HFHS ad lib", "HFHS restriction"]).iloc[-2:]
 # Add custom edge colors
 final_barplot_plot_parameters["edgecolors"] = ["darkred", "red"]
+
+
+# In[26]:
 
 
 #----------------------------------------------------------
@@ -1003,7 +1042,10 @@ plt.figtext(-0.09, 0.285, "D", fontsize = 15, color = "black", fontweight = "bol
 ax.spines["right"].set_visible(False)
 ax.spines["top"].set_visible(False)
 
-plt.savefig("Figures_And_Analysis/Fig4.tif", dpi = 1000)
+plt.savefig("Figures_And_Analysis/Fig4.tif", dpi = 1000, bbox_inches="tight")
+
+
+# In[250]:
 
 
 #----------------------------------------------------------
@@ -1033,6 +1075,9 @@ first_hour_sucrose_results.set_index("diet").to_csv("Figures_and_Analysis/Fig4At
 result = activity_anova(final_sucrose_frame)
 
 result.to_csv("Figures_and_Analysis/Fig4D_ANOVA_and_TukeyHSD.csv")
+
+
+# In[251]:
 
 
 #----------------------------------------------------------
@@ -1097,6 +1142,9 @@ make_gene_legend()
 sns.despine()
 plt.tight_layout()
 plt.savefig('Figures_and_Analysis/Fig5.tiff', dpi = 1000)
+
+
+# In[252]:
 
 
 #----------------------------------------------------------
