@@ -18,8 +18,8 @@ import sys
 #----------------------------------------------------------
 # Check Python Version
 #----------------------------------------------------------
-if sys.version < "3.8.6":
-    raise Exception("Must be using Python 3.8.6 or newer")
+if sys.version < "3.8.2":
+    raise Exception("Must be using Python 3.8.2 or newer")
 
 
 #----------------------------------------------------------

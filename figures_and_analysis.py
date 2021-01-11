@@ -1,4 +1,4 @@
-# Creating Figures and Performing Statistical Analysis
+# # Creating Figures and Performing Statistical Analysis
 # Used to create and perform statistical analysis for all figures in 
 # Time-Restricted Feeding in the Active Phase Drives Periods of Rapid Food Consumption in Rats Fed a High-Fat, High-Sugar Diet with Liquid Sucrose 
 # by Kush Attal, Julia Wickman Shihoko Kojima, Sarah N. Blythe, Natalia Toporikova
@@ -34,8 +34,8 @@ plt.rcParams['figure.dpi'] = 1000
 #----------------------------------------------------------
 # Check Python Version
 #----------------------------------------------------------
-if sys.version < "3.8.6":
-    raise Exception("Must be using Python 3.8.6 or newer")
+if sys.version < "3.8.2":
+    raise Exception("Must be using Python 3.8.2 or newer")
 
 
 #----------------------------------------------------------
@@ -63,8 +63,10 @@ def Fig1A_timeplot(metafile, body_weight):
     plt.xlabel('Days on diet', fontsize=10, fontweight = "bold", color = "black")
     plt.ylabel('Body Weight (g)', fontsize=10, fontweight = "bold", color = "black")
     plt.yticks(fontweight = 'bold', fontsize=10, color = "black")
+    # Increase number of yticks
+    plt.xticks(np.arange(0, 60, 10))
     plt.xticks(fontweight = 'bold', fontsize=10, color = "black")
-    plt.legend(artists, ('Cont\nAL', 'Cont\nRes', 'HFHS\nAL', 'HFHS\nRes'), fontsize = 8.6)
+    plt.legend(artists, ('Cont\nAL', 'Cont\nRes', 'HFHS\nAL', 'HFHS\nRes'), fontsize = 6)
     
 # Method to run ANOVA stats and Tukey Posthoc on body weight data for each day
 def day_anova_analysis(day, anova_data):
@@ -98,7 +100,7 @@ def Fig1B_boxplot(master_data, plot_parameters):
     
     
 # Function to create Fig2 boxplot
-def Fig2_boxplot(metabolite, unit, name):
+def Fig1CtoF_boxplot(metabolite, unit, name):
     # Set the size, dashed lines, and colors for the figure
     ax = sns.boxplot(x=master_data.index, y=metabolite, color='white', linewidth=1, palette=plot_parameters.fill_color, showfliers = False)
     hatches = ["", "///", "", "///"]
@@ -117,7 +119,6 @@ def Fig2_boxplot(metabolite, unit, name):
 
     # Clean up and save the figure
     sns.despine()
-    plt.tight_layout()
     
 # Method to create legend for Fig2
 def make_legend():
@@ -130,7 +131,6 @@ def make_legend():
     circ4 = mpatches.Patch(facecolor=colors[3],hatch='//',label='HFHS\nRes')
 
     plt.legend(handles = [circ1,circ2,circ3, circ4],loc=0, bbox_to_anchor=(1, 1))
-    plt.tight_layout()
     return()
 
     
@@ -149,7 +149,7 @@ def metabolite_anova_analysis(metabolite, anova_data):
     return result
 
 # Function to create Fig3A box plot
-def Fig3A_boxplot(df, variable, title, palette_type, ymax = 8000):
+def Fig2A_boxplot(df, variable, title, palette_type, ymax = 8000):
     ax1 = sns.swarmplot(x=df.group, y=df[variable], color='black', size=3)
     ax = sns.boxplot    (x=df.group, y=df[variable], color='white', linewidth=1, palette=palette_type.fill_color, showfliers = False)
     # Make hatched pattern to distinguish between Ad lib and restriction
@@ -177,7 +177,7 @@ def adjust_lightness(color, amount=1.5):
     return colorsys.hls_to_rgb(c[0], max(0, min(1, amount * c[1])), c[2])
 
 # Function to create Fig3B bar plot
-def Fig3B_barplot(df, title, barplot_plot_parameters, ymax = 5000):
+def Fig2B_barplot(df, title, barplot_plot_parameters, ymax = 5000):
     ax = sns.barplot(x="group", y="Consumption_Rate", data = df, hue = "phase", 
                      ci = 68, capsize=.1, errwidth=0.9)
     
@@ -230,7 +230,7 @@ def runing_avg(x, window):
     return(z)
     
 # Function to create Fig4A-D rolling-average Time Chart 
-def Fig4AD_timeplot(diet_column, color, linestyle, ymax=0.4, ylabel = "Normalized \nFeeding Activity"):
+def Fig3AD_timeplot(diet_column, color, linestyle, ymax=0.4, ylabel = "Normalized \nFeeding Activity"):
     plt.plot(runing_avg(diet_column, 1800), color = color, linestyle = linestyle, lw = 1)
     
     # Add x- and y-labels, ticks, and units
@@ -242,11 +242,9 @@ def Fig4AD_timeplot(diet_column, color, linestyle, ymax=0.4, ylabel = "Normalize
     
     # Span 0.5 days (span the last 1/8 of Day 1 and the first 3/8 of Day 2) and shade for dark phase
     plt.axvspan(0.875, 1.375, facecolor='black', alpha=0.15)
-    # Clean up plot
-    plt.tight_layout()
     
 # Function to create Fig4E and 4F time plot of hourly feeding activity during 8-hour restricted window 
-def Fig4EF_timeplot(hourly_dataframe, group, color, video_metafile):
+def Fig3EF_timeplot(hourly_dataframe, group, color, video_metafile):
     # Separate new dataframe into subgroups according to diet and food accesibility
     hours = np.arange(0, hourly_dataframe.shape[0]) + 1
     ids = video_metafile[video_metafile == group].index
@@ -259,18 +257,15 @@ def Fig4EF_timeplot(hourly_dataframe, group, color, video_metafile):
     plt.xlim(0, 24)
     plt.ylim(0, 1100)
     plt.xlabel('Time (hr)', fontname = 'Arial', fontsize=10, fontweight = "bold", color = "black")
-    plt.ylabel('Time Spent Feeding (sec)', fontsize=10, color = "black", fontweight = "bold")
+    plt.ylabel('Time Spent \nFeeding (sec)', fontsize=10, color = "black", fontweight = "bold")
     plt.yticks(fontname = 'Arial', fontsize=10, color = "black")
     plt.xticks([0, 6, 12, 18, 24],['21:00', '3:00', '9:00', '15:00', '21:00'], rotation=0, fontname = 'Arial', fontsize=10, color = 'black')
     
     # Add shading to depic "night" vs "day" phase
     plt.axvspan(0, 12, facecolor='black', alpha=0.15)
-
-    # Clean up plot
-    plt.tight_layout()
     
 # Function to create Fig5 bar plot
-def Fig5_barplot(df, title, barplot_plot_parameters, ymax = 600):
+def Fig3G_barplot(df, title, barplot_plot_parameters, ymax = 600):
     # Create barplot 
     ax = sns.barplot(x="group", y="Consumption_Rate", data = df, hue = "phase", 
                      ci = 68, capsize=.1, errwidth=0.9)
@@ -319,28 +314,22 @@ def Fig5_barplot(df, title, barplot_plot_parameters, ymax = 600):
     # Remove legend
     ax.get_legend().remove()
     
-    # Remove unnecessary axes
-    sns.despine()
-    plt.tight_layout()
-    
 # Function to create Fig6AB rolling-average Time Chart 
-def Fig6AB_timeplot(diet_column, color, linestyle, ymax=0.08, ylabel = "Normalized \nSucrose Activity"):
+def Fig4AB_timeplot(diet_column, color, linestyle, ymax=0.08, ylabel = "Normalized \nSucrose Activity"):
     plt.plot(runing_avg(diet_column, 1800), color = color, linestyle = linestyle, lw = 1)
     
     # Add x- and y-labels, ticks, and units
     plt.yticks(fontname = 'Arial', fontsize=10, color = 'black')
-    plt.ylabel(ylabel, color = 'black', fontname = 'Arial', fontsize=10, fontweight='bold')
+    plt.ylabel(ylabel, color = 'black', fontname = 'Arial', fontsize=12, fontweight='bold')
     plt.ylim(0, ymax)
     plt.xlim('1970-01-01 21:00:00.000', '1970-01-02 21:00:00.000')
     plt.xlabel('Time (hr)', fontname = 'Arial', fontsize=10, fontweight='bold', color = 'black')
     
     # Span 0.5 days (span the last 1/8 of Day 1 and the first 3/8 of Day 2) and shade dark phase
     plt.axvspan(0.875, 1.375, facecolor='black', alpha=0.15)
-    # Clean up plot
-    plt.tight_layout()
     
 # Function to create Fig6C time plot of hourly sucrose activity during 8-hour restricted window 
-def Fig6C_timeplot(hourly_dataframe, group, color, video_metafile):
+def Fig4C_timeplot(hourly_dataframe, group, color, video_metafile):
     # Separate new dataframe into subgroups according to diet and food accesibility
     hours = np.arange(0, hourly_dataframe.shape[0]) + 1
     ids = video_metafile[video_metafile == group].index
@@ -353,18 +342,15 @@ def Fig6C_timeplot(hourly_dataframe, group, color, video_metafile):
     plt.xlim(0, 24)
     plt.ylim(0, 250)
     plt.xlabel('Time (hr)', fontname = 'Arial', fontsize=10, fontweight = "bold", color = "black")
-    plt.ylabel('Time Spent Drinking \nSucrose (sec)', fontsize=10, color = "black", fontweight = "bold")
+    plt.ylabel('Time Spent \nDrinking Sucrose (sec)', fontsize=10, color = "black", fontweight = "bold")
     plt.yticks(fontname = 'Arial', fontsize=10, color = "black")
     plt.xticks([0, 6, 12, 18, 24],['21:00', '3:00', '9:00', '15:00', '21:00'], rotation=0, fontname = 'Arial', fontsize=10, color = 'black')
     
     # Add shading to depict "night" vs "day" phase
     plt.axvspan(0, 12, facecolor='black', alpha=0.15)
-
-    # Clean up plot
-    plt.tight_layout()
     
 # Function to create Fig7 bar plot
-def Fig7_barplot(df, title, barplot_plot_parameters, ymax = 150):
+def Fig4D_barplot(df, title, barplot_plot_parameters, ymax = 150):
     # Create barplot 
     ax = sns.barplot(x="group", y="Consumption_Rate", data = df, hue = "phase", 
                      ci = 68, capsize=.1, errwidth=0.9)
@@ -413,10 +399,6 @@ def Fig7_barplot(df, title, barplot_plot_parameters, ymax = 150):
     # Remove legend
     ax.get_legend().remove()
     
-    # Remove unnecessary axes
-    sns.despine()
-    plt.tight_layout()
-    
 # Method to run ANOVA and Tukey on feeding and sucrose activity (final 3 hours)
 def activity_anova(anova_data):
     
@@ -445,7 +427,7 @@ def activity_anova(anova_data):
     return result
 
 # Function to create Fig8 boxplot
-def Fig8_boxplot(data, plot_parameters, name):
+def Fig5_boxplot(data, plot_parameters, name):
     #ax1 = sns.swarmplot(x=data.group, y=data[name], color='black', size=6)
     ax = sns.boxplot   (x=data.group, y=data[name], color='white', linewidth=1, palette=plot_parameters.fill_color, showfliers = False)
     # Make hatched pattern to distinguish between Ad lib and restriction
@@ -472,13 +454,11 @@ def make_gene_legend():
     return()
 
 
-
 #----------------------------------------------------------
 # Create Directory to Hold Figures In
 #----------------------------------------------------------
 if not os.path.exists("Figures_And_Analysis"):
     os.mkdir("Figures_And_Analysis")
-
 
 
 #----------------------------------------------------------
@@ -535,7 +515,6 @@ sucrose_hourly_frame = pd.read_csv(sucrose_archive.open('sucrose_total_by_hour.c
 gene_data = pd.read_csv("Data for figures/qPCR_normalized_gapdph.csv", index_col=0)
 
 
-
 #----------------------------------------------------------
 # Figure1 Generation
 #----------------------------------------------------------
@@ -543,32 +522,70 @@ gene_data = pd.read_csv("Data for figures/qPCR_normalized_gapdph.csv", index_col
 plot_body_weight.drop(['Rat', 'Diet', 'Feeding'], inplace = True)
 
 # Figure 1 Size
-plt.figure(figsize = (7.48, 3.0))
+plt.figure(figsize = (7.48, 6))
 
 # Create Fig1A subplot
-plt.subplot(1,2,1)
+plt.subplot2grid((2, 5), (0, 0), colspan=2)
 Fig1A_timeplot(metafile, plot_body_weight)
 # Significance Markers
 plt.annotate('*', (4.4, 80), fontsize=15, color = 'black', fontweight='bold')
 plt.annotate('#', (44.2, 365), fontsize=10, color = 'gray', fontweight='bold')
 # Subplot Text Label
-plt.figtext(0.03, 0.93, "A", fontsize = 15, color = "black", fontweight = "bold")
-
-#plt.text(-7.5, 380, 'A', fontsize=15, fontweight='bold')
+plt.figtext(0.05, 0.86, 'A', fontsize=15, fontweight='bold')
 
 # Create Fig1B subplot
-plt.subplot(1,2,2)
+plt.subplot2grid((2, 5), (0, 2), colspan=2)
 Fig1B_boxplot(master_data.set_index("Rat"), plot_parameters)
 # Significance Markers
-plt.annotate('*', (1.96, 26.8), fontsize=15, color = 'black', fontweight='bold')
+plt.annotate('*', (1.93, 26.8), fontsize=15, color = 'black', fontweight='bold')
 # Subplot Text Label
-plt.figtext(0.52, 0.93, "B", fontsize = 15, color = "black", fontweight = "bold")
+plt.figtext(0.395, 0.86, 'B', fontsize=15, fontweight='bold')
 
-#plt.text(-0.8, 28, 'B', fontsize=15, fontweight='bold')
+# Create Legend
+ax = plt.subplot(2,5,5)
+make_legend()
+ax.axis('off')
 
-# Clean up and save the figure
+# LIVER WEIGHT
+plt.subplot(2, 4, 8)
+Fig1CtoF_boxplot(master_data.liver_weight, "g", "Liver Mass")
+# Increase number of yticks
+plt.yticks(np.arange(12, 22, 2))
+# Subplot Text Label
+plt.figtext(0.7, 0.43, "F", fontsize = 15, color = "black", fontweight = "bold")
+
+
+# TRIGLYCERIDE
+plt.subplot(2, 4, 7)
+Fig1CtoF_boxplot(master_data.Triglyceride, "mg/mL", "Triglyceride")
+# Significance Markers
+plt.annotate('*', (1.85, 4.7), fontsize=15, color = 'black', fontweight='bold')
+plt.annotate('#', (2.8, 3.5), fontsize=10, color = 'black', fontweight='bold')
+# Subplot Text Label
+plt.figtext(0.5, 0.43, "E", fontsize = 15, color = "black", fontweight = "bold")
+
+# ADIPONECTIN
+plt.subplot(2, 4, 6)
+Fig1CtoF_boxplot(master_data.Adiponectin, "mcg/mL", "Adiponectin")
+# Increase number of yticks
+plt.yticks(np.arange(4, 10, 1))
+# Significance Markers
+plt.annotate('#', (0.8, 9.5), fontsize=10, color = 'black', fontweight='bold')
+plt.annotate('*', (2.85, 7.5), fontsize=15, color = 'black', fontweight='bold')
+# Subplot Text Label
+plt.figtext(0.285, 0.43, "D", fontsize = 15, color = "black", fontweight = "bold")
+
+# LEPTIN
+plt.subplot(2, 4, 5)
+Fig1CtoF_boxplot(master_data.Leptin, "mcg/mL", "Leptin")
+# Significance Markers
+plt.annotate('#', (2.8, 2.1), fontsize=10, color = 'black', fontweight='bold')
+# Subplot Text Label
+plt.figtext(0.07, 0.43, "C", fontsize = 15, color = "black", fontweight = "bold")
+
+# Clean up figure
 sns.despine()
-plt.tight_layout()
+plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=0.6, hspace=0.3)
 
 plt.savefig('Figures_And_Analysis/Fig1.tif', dpi = 1000)
 
@@ -619,62 +636,11 @@ total_fat_mass_anova = metabolite_anova_analysis("total_fat_pad", master_data.se
 total_fat_mass_anova.fillna("").rename(index={0:'', 1:'', 2:'', 3:'', 4:'', 5:''}).to_csv("Figures_And_Analysis/Fig1B_ANOVA_and_TukeyHSD.csv")
 
 
-#----------------------------------------------------------
-# Figure2 Generation
-#----------------------------------------------------------
-
-# Figure 2 Size
-plt.figure(figsize = (7.48, 2.5))
-
-# LIVER WEIGHT
-plt.subplot(1, 4, 4)
-Fig2_boxplot(master_data.liver_weight, "g", "Liver Mass")
-# Subplot Text Label
-plt.figtext(0.64, 0.93, "D", fontsize = 15, color = "black", fontweight = "bold")
-
-# Create Legend
-make_legend()
-
-# TRIGLYCERIDE
-plt.subplot(1, 4, 3)
-Fig2_boxplot(master_data.Triglyceride, "mg/mL", "Triglyceride")
-# Significance Markers
-plt.annotate('*', (1.85, 4.7), fontsize=15, color = 'black', fontweight='bold')
-plt.annotate('#', (2.8, 3.5), fontsize=10, color = 'black', fontweight='bold')
-# Subplot Text Label
-plt.figtext(0.44, 0.93, "C", fontsize = 15, color = "black", fontweight = "bold")
-
-# ADIPONECTIN
-plt.subplot(1, 4, 2)
-Fig2_boxplot(master_data.Adiponectin, "mcg/mL", "Adiponectin")
-# Increase number of yticks
-plt.yticks(np.arange(4, 10, 1))
-# Significance Markers
-plt.annotate('#', (0.8, 9.5), fontsize=10, color = 'black', fontweight='bold')
-plt.annotate('*', (2.85, 7.5), fontsize=15, color = 'black', fontweight='bold')
-# Subplot Text Label
-plt.figtext(0.23, 0.93, "B", fontsize = 15, color = "black", fontweight = "bold")
-
-# LEPTIN
-plt.subplot(1, 4, 1)
-Fig2_boxplot(master_data.Leptin, "mcg/mL", "Leptin")
-# Significance Markers
-plt.annotate('#', (2.8, 2.1), fontsize=10, color = 'black', fontweight='bold')
-# Subplot Text Label
-plt.figtext(0.015, 0.93, "A", fontsize = 15, color = "black", fontweight = "bold")
-
-
-plt.savefig("Figures_And_Analysis/Fig2.tif", dpi = 1000)
-
-
-#----------------------------------------------------------
-# Figure2 Statistical Analysis
-#----------------------------------------------------------
 metabolites_hormones = ['Leptin', 'Adiponectin', 'Triglyceride', 'liver_weight']
 
 metabolite_results = pd.DataFrame()
 
-# ANOVA and Tukey for all 4 metabolites and liver weight
+# Fig1C through F ANOVA and Tukey
 for group in metabolites_hormones:
     result = metabolite_anova_analysis(group, master_data.set_index("Rat"))
 
@@ -682,12 +648,11 @@ for group in metabolites_hormones:
     metabolite_results = metabolite_results.append(result)
 
 # Send Results to CSV File
-metabolite_results.fillna("").rename(index={0:'', 1:'', 2:'', 3:'', 4:'', 5:''}).to_csv("Figures_And_Analysis/Fig2_ANOVA_and_Tukey.csv")
-
+metabolite_results.fillna("").rename(index={0:'', 1:'', 2:'', 3:'', 4:'', 5:''}).to_csv("Figures_And_Analysis/Fig1CtoF_ANOVA_and_Tukey.csv")
 
 
 #----------------------------------------------------------
-# Figure3 Generation
+# Figure2 Generation
 #----------------------------------------------------------
 # Modify raw data for figures
 # Combine number of seconds in dark and light periods together into new column called "total_food"
@@ -729,20 +694,20 @@ barplot_plot_parameters = plot_parameters.reindex(["control restriction", "HFHS 
 # Add custom edge colors
 barplot_plot_parameters["edgecolors"] = ["black", "darkred"]
 
-# Figure 3 Size
+# Figure 2 Size
 plt.figure(figsize=(7.48, 2.5))
 
-# Figure 3A
+# Figure 2A
 plt.subplot(1,2,1)
-Fig3A_boxplot(sucrose_and_feeding_data, 'total', "Total Time Consuming \n Calories (sec)", plot_parameters)
-plt.figtext(0.03, 0.93, "A", fontsize = 15, color = "black", fontweight = "bold")
+Fig2A_boxplot(sucrose_and_feeding_data, 'total', "Total Time \n Consuming Calories (sec)", plot_parameters)
+plt.figtext(0.01, 0.88, "A", fontsize = 15, color = "black", fontweight = "bold")
 # Significance Markers
 plt.annotate('#', (0.95, 7000), fontsize=15, color = 'black', fontweight='bold')
 
-# Figure 3B
+# Figure 2B
 plt.subplot(1,2,2)
-Fig3B_barplot(plot_feeding_frame,  "Time Spent Consuming \n Calories (sec)", barplot_plot_parameters)
-plt.figtext(0.52, 0.93, "B", fontsize = 15, color = "black", fontweight = "bold")
+Fig2B_barplot(plot_feeding_frame,  "Time Spent \n Consuming Calories (sec)", barplot_plot_parameters)
+plt.figtext(0.5, 0.88, "B", fontsize = 15, color = "black", fontweight = "bold")
 # Add Numbers
 plt.annotate('29.47%', (0.09, 2000), fontsize=10, color = 'black', fontweight='bold')
 plt.annotate('70.53%', (-0.3, 4100), fontsize=10, color = 'black', fontweight='bold')
@@ -755,11 +720,11 @@ plt.annotate('*', (1.17, 2000), fontsize=15, color = 'black', fontweight='bold')
 plt.plot([0, 1], [4500, 4500], 'k-', lw=1)
 plt.annotate('a', (0.45, 4600), fontsize=10, color = 'black', fontweight='bold')
 
-plt.savefig('Figures_And_Analysis/Fig3.tif', dpi = 1000)
+plt.savefig('Figures_And_Analysis/Fig2.tif', dpi = 1000)
 
 
 #----------------------------------------------------------
-# Figure3 Statistical Analysis
+# Figure2 Statistical Analysis
 #----------------------------------------------------------
 # T-Tests for Fig3
 results = pd.DataFrame(columns = ["group1", "group2", "t-statistic", "p-value"])
@@ -790,106 +755,11 @@ t, p = stats.ttest_ind(sucrose_and_feeding_data_ratio["dark"].where(sucrose_and_
                       sucrose_and_feeding_data_ratio["dark"].where(sucrose_and_feeding_data_ratio.group == "HFHS ad lib").dropna())
 results.loc[5] = ["control ad lib Night Ratio", "HFHS ad lib Night Ratio", t, p]
 
-results.set_index("group1").to_csv("Figures_And_Analysis/Fig3_T_Tests.csv")
-
-#----------------------------------------------------------
-# Figure4 Generation
-#----------------------------------------------------------
-# Figure 4 Size
-f = plt.figure(figsize = (7.48, 7))
-
-# Fig4A - Control AdLib
-plt.subplot(3, 2, 1)
-Fig4AD_timeplot(normalized_feeding["Control Ad Lib"], "0.1", "-")
-# Remove x-axis and ticks for subplot
-plt.xlabel('')
-plt.xticks([])
-
-## Remove '0' from y-axis
-plt.gca().yaxis.get_major_ticks()[0].label1.set_visible(False)
-plt.figtext(0.04, 0.97, "A", fontsize = 15, color = "black", fontweight = "bold")
-
-# Fig4B - HFHS AdLib
-plt.subplot(3, 2, 2)
-Fig4AD_timeplot(normalized_feeding["HFHS Ad Lib"], "red", "-")
-plt.xlabel('')
-plt.xticks([])
-# Remove y-axis and ticks for subplot
-plt.ylabel('')
-plt.yticks([])
-plt.figtext(0.53, 0.97, "B", fontsize = 15, color = "black", fontweight = "bold")
-
-# Fig4C - Control Restricted
-plt.subplot(3, 2, 3)
-Fig4AD_timeplot(normalized_feeding["Control Restricted"], "0.1", "--")
-plt.xlabel('')
-plt.xticks([])
-
-## Remove '0' from y-axis
-plt.gca().yaxis.get_major_ticks()[0].label1.set_visible(False)
-plt.figtext(0.04, 0.67, "C", fontsize = 15, color = "black", fontweight = "bold")
-
-# Fig4D - HFHS Restricted
-plt.subplot(3, 2, 4)
-Fig4AD_timeplot(normalized_feeding["HFHS Restricted"], "red", "--")
-plt.ylabel('')
-plt.yticks([])
-plt.xlabel('')
-plt.xticks([])
-plt.figtext(0.53, 0.67, "D", fontsize = 15, color = "black", fontweight = "bold")
-plt.tight_layout()
-
-# Fig4E - Control Restrited - 8-Hour Period
-plt.subplot(3, 2, 5)
-Fig4EF_timeplot(feeding_hourly_frame.T.iloc[:-1, :], "control restriction", "0.1", video_metafile)
-# Significance Markers
-plt.annotate('*', (6.7, 220), fontsize=15, color = 'black', fontweight='bold')
-plt.annotate('*', (7.7, 150), fontsize=15, color = 'black', fontweight='bold')
-plt.annotate('*', (8.7, 220), fontsize=15, color = 'black', fontweight='bold')
-plt.annotate('*', (9.7, 240), fontsize=15, color = 'black', fontweight='bold')
-plt.figtext(0.04, 0.36, "E", fontsize = 15, color = "black", fontweight = "bold")
-
-# Fig4F - HFHS Restrited - 8-Hour Period
-plt.subplot(3, 2, 6)
-Fig4EF_timeplot(feeding_hourly_frame.T.iloc[:-1, :], "HFHS restriction", "red", video_metafile)
-plt.ylabel('')
-plt.yticks([])
-# Significance Markers
-plt.annotate('*', (5.7, 200), fontsize=15, color = 'black', fontweight='bold')
-plt.annotate('*', (6.7, 210), fontsize=15, color = 'black', fontweight='bold')
-plt.annotate('*', (8.5, 160), fontsize=15, color = 'black', fontweight='bold')
-plt.figtext(0.53, 0.36, "F", fontsize = 15, color = "black", fontweight = "bold")
-
-plt.tight_layout()
-plt.savefig("Figures_And_Analysis/Fig4.tif", dpi = 1000)
+results.set_index("group1").to_csv("Figures_And_Analysis/Fig2_T_Tests.csv")
 
 
 #----------------------------------------------------------
-# Figure4 Statistical Analysis
-#----------------------------------------------------------
-# Running T-Tests to Compare All Hours Against the First Hour of Binge-Eating
-first_hour_results = pd.DataFrame(columns = ["diet", "hour1", "hour2", "t-statistic", "p-value"])
-diet_groups = ["control restriction", "HFHS restriction"]
-i = 0
-hours_to_check = ["0:00", "1:00","2:00", "3:00","4:00", "5:00","6:00"]
-for group in diet_groups:
-    ids = video_metafile[video_metafile == group].index
-    for hour in feeding_hourly_frame.iloc[:, :-1]:
-        feeding_series = feeding_hourly_frame.iloc[:, :-1].loc[ids]
-        if feeding_series[hour].isnull().all() or hour not in hours_to_check:
-            pass
-        else:
-            t, p = stats.ttest_ind(feeding_series["23:00"].dropna(), 
-                          feeding_series[hour].dropna())
-            first_hour_results.loc[i] = [group, "23:00", hour, t, p]
-            i += 1
-            
-first_hour_results.set_index("diet").to_csv("Figures_and_Analysis/Fig4_T_Tests.csv")
-
-
-
-#----------------------------------------------------------
-# Figure5 Generation
+# Figure3G Dataframe Generation
 #----------------------------------------------------------
 # Select only the final 3 hours of interest (from 4:00 to 7:00)
 final_hours_of_interest = feeding_hourly_frame[["4:00", "5:00", "6:00", "group"]]
@@ -921,96 +791,135 @@ final_barplot_plot_parameters = plot_parameters.reindex(["control ad lib", "HFHS
 # Add custom edge colors
 final_barplot_plot_parameters["edgecolors"] = ["grey", "red"]
 
-# Figure 5 Size
-plt.figure(figsize=(3.543, 2.5))
 
-# Final 3 Hours
-Fig5_barplot(final_feeding_frame, "Time Spent Feeding (sec)", final_barplot_plot_parameters)
+#----------------------------------------------------------
+# Figure3 Generation
+#----------------------------------------------------------
+# Figure 3 Size
+f = plt.figure(figsize = (7.48, 9.34))
+
+# Fig3A - Control AdLib
+plt.subplot2grid((22, 2), (0, 0), rowspan=5)
+Fig3AD_timeplot(normalized_feeding["Control Ad Lib"], "0.1", "-")
+# Remove x-axis and ticks for subplot
+plt.xlabel('')
+plt.xticks([])
+## Remove '0' from y-axis
+plt.gca().yaxis.get_major_ticks()[0].label1.set_visible(False)
+plt.figtext(0.04, 0.865, "A", fontsize = 15, color = "black", fontweight = "bold")
+### Group Label
+plt.figtext(0.39, 0.86, "Cont AL", fontsize = 10, color = "black", fontweight = "bold")
+
+# Fig3B - HFHS AdLib
+plt.subplot2grid((22, 2), (0, 1), rowspan=5)
+Fig3AD_timeplot(normalized_feeding["HFHS Ad Lib"], "red", "-")
+plt.xlabel('')
+plt.xticks([])
+# Remove y-axis and ticks for subplot
+plt.ylabel('')
+plt.yticks([])
+plt.figtext(0.5, 0.865, "B", fontsize = 15, color = "black", fontweight = "bold")
+### Group Label
+plt.figtext(0.8, 0.86, "HFHS AL", fontsize = 10, color = "red", fontweight = "bold")
+
+# Fig3C - Control Restricted
+plt.subplot2grid((22, 2), (5, 0), rowspan=5)
+Fig3AD_timeplot(normalized_feeding["Control Restricted"], "0.1", "--")
+plt.xlabel('')
+plt.xticks([])
+## Remove '0' from y-axis
+plt.gca().yaxis.get_major_ticks()[0].label1.set_visible(False)
+plt.figtext(0.04, 0.69, "C", fontsize = 15, color = "black", fontweight = "bold")
+### Group Label
+plt.figtext(0.39, 0.685, "Cont Res", fontsize = 10, color = "black", fontweight = "bold")
+
+# Fig3D - HFHS Restricted
+plt.subplot2grid((22, 2), (5, 1), rowspan=5)
+Fig3AD_timeplot(normalized_feeding["HFHS Restricted"], "red", "--")
+plt.ylabel('')
+plt.yticks([])
+plt.xlabel('')
+plt.xticks([])
+plt.figtext(0.5, 0.69, "D", fontsize = 15, color = "black", fontweight = "bold")
+### Group Label
+plt.figtext(0.8, 0.685, "HFHS Res", fontsize = 10, color = "red", fontweight = "bold")
+
+# Fig3E - Control Restrited - 8-Hour Period
+plt.subplot2grid((22, 2), (10, 0), rowspan=5)
+Fig3EF_timeplot(feeding_hourly_frame.T.iloc[:-1, :], "control restriction", "0.1", video_metafile)
+# Significance Markers
+plt.annotate('*', (6.7, 220), fontsize=15, color = 'black', fontweight='bold')
+plt.annotate('*', (7.7, 150), fontsize=15, color = 'black', fontweight='bold')
+plt.annotate('*', (8.7, 220), fontsize=15, color = 'black', fontweight='bold')
+plt.annotate('*', (9.7, 240), fontsize=15, color = 'black', fontweight='bold')
+plt.figtext(0.04, 0.515, "E", fontsize = 15, color = "black", fontweight = "bold")
+### Group Label
+plt.figtext(0.39, 0.51, "Cont Res", fontsize = 10, color = "black", fontweight = "bold")
+
+# Fig3F - HFHS Restrited - 8-Hour Period
+plt.subplot2grid((22, 2), (10, 1), rowspan=5)
+Fig3EF_timeplot(feeding_hourly_frame.T.iloc[:-1, :], "HFHS restriction", "red", video_metafile)
+plt.ylabel('')
+plt.yticks([])
+# Significance Markers
+plt.annotate('*', (5.7, 200), fontsize=15, color = 'black', fontweight='bold')
+plt.annotate('*', (6.7, 210), fontsize=15, color = 'black', fontweight='bold')
+plt.annotate('*', (8.5, 160), fontsize=15, color = 'black', fontweight='bold')
+plt.figtext(0.5, 0.515, "F", fontsize = 15, color = "black", fontweight = "bold")
+### Group Label
+plt.figtext(0.8, 0.51, "HFHS Res", fontsize = 10, color = "red", fontweight = "bold")
+
+# Fig3G - Final 3 Hours
+ax = plt.subplot2grid((22, 2), (17, 0), rowspan=5, colspan=2)
+Fig3G_barplot(final_feeding_frame, "Time Spent \nFeeding (sec)", final_barplot_plot_parameters)
 # Increase number of yticks
 plt.yticks(np.arange(0, 700, 100))
 # Significance Markers
-plt.annotate('ab', (1.225, 550), fontsize=10, color = 'black', fontweight='bold')
+plt.annotate('*', (1, 580), fontsize=15, color = 'black', fontweight='bold')
+plt.plot([0.75, 1.25], [600, 600], 'k-', lw=1)
+plt.annotate('*', (1.1, 535), fontsize=15, color = 'black', fontweight='bold')
+plt.plot([1, 1.25], [555, 555], 'k-', lw=1)
+plt.figtext(0.04, 0.28, "G", fontsize = 15, color = "black", fontweight = "bold")
 
-plt.savefig("Figures_And_Analysis/Fig5.tif", dpi = 1000)
+# Despine subplot
+ax.spines["right"].set_visible(False)
+ax.spines["top"].set_visible(False)
+plt.subplots_adjust(wspace=0.15)
 
-
-
-#----------------------------------------------------------
-# Figure5 Statistical Analysis
-#----------------------------------------------------------
-#----ANOVA for Final 3 Hours------   
-# Perform 1-Way ANOVA and Tukey and place the results in a dataframe
-result = activity_anova(final_feeding_frame)
-
-result.to_csv("Figures_and_Analysis/Fig5_ANOVA_and_TukeyHSD.csv")
-
+plt.savefig("Figures_And_Analysis/Fig3.tif", dpi = 1000)
 
 
 #----------------------------------------------------------
-# Figure6 Generation
-#----------------------------------------------------------
-# Figure 6 Size
-plt.figure(figsize = (3.543, 7))
-
-# Fig6A - HFHS AdLib
-plt.subplot(3, 1, 1)
-Fig6AB_timeplot(normalized_sucrose["HFHS Ad Lib"], "red", "-")
-# Remove x-axis and ticks for subplot
-plt.xlabel('')
-plt.xticks([])
-
-# Remove leading 0
-plt.gca().yaxis.get_major_ticks()[0].label1.set_visible(False)
-plt.figtext(0.04, 0.97, "A", fontsize = 15, color = "black", fontweight = "bold")
-
-# Fig6B - HFHS Restriction
-plt.subplot(3, 1, 2)
-Fig6AB_timeplot(normalized_sucrose["HFHS Restricted"], "red", "--")
-# Remove x-axis and ticks for subplot
-plt.xlabel('')
-plt.xticks([])
-
-## Remove leading 0
-plt.gca().yaxis.get_major_ticks()[0].label1.set_visible(False)
-plt.figtext(0.04, 0.67, "B", fontsize = 15, color = "black", fontweight = "bold")
-
-# HFHS Restrited - Binge
-plt.subplot(3, 1, 3)
-Fig6C_timeplot(sucrose_hourly_frame.T.iloc[:-1, :], "HFHS restriction", "red", video_metafile)
-# Significance Markers
-plt.annotate('*', (3.7, 45), fontsize=15, color = 'black', fontweight='bold')
-plt.annotate('*', (5.7, 75), fontsize=15, color = 'black', fontweight='bold')
-plt.figtext(0.04, 0.36, "C", fontsize = 15, color = "black", fontweight = "bold")
-plt.savefig("Figures_And_Analysis/Fig6.tif", dpi = 1000)
-
-
-
-#----------------------------------------------------------
-# Figure6 Statistical Analysis
+# Figure3 Statistical Analysis
 #----------------------------------------------------------
 # Running T-Tests to Compare All Hours Against the First Hour of Binge-Eating
-first_hour_sucrose_results = pd.DataFrame(columns = ["diet", "hour1", "hour2", "t-statistic", "p-value"])
-diet_groups = ["HFHS restriction"]
+first_hour_results = pd.DataFrame(columns = ["diet", "hour1", "hour2", "t-statistic", "p-value"])
+diet_groups = ["control restriction", "HFHS restriction"]
 i = 0
 hours_to_check = ["0:00", "1:00","2:00", "3:00","4:00", "5:00","6:00"]
 for group in diet_groups:
     ids = video_metafile[video_metafile == group].index
-    for hour in sucrose_hourly_frame.iloc[:, :-1]:
-        sucrose_series = sucrose_hourly_frame.iloc[:, :-1].loc[ids]
-        if sucrose_series[hour].isnull().all() or hour not in hours_to_check:
+    for hour in feeding_hourly_frame.iloc[:, :-1]:
+        feeding_series = feeding_hourly_frame.iloc[:, :-1].loc[ids]
+        if feeding_series[hour].isnull().all() or hour not in hours_to_check:
             pass
         else:
-            t, p = stats.ttest_ind(sucrose_series["23:00"].dropna(), 
-                          sucrose_series[hour].dropna())
-            first_hour_sucrose_results.loc[i] = [group, "23:00", hour, t, p]
+            t, p = stats.ttest_ind(feeding_series["23:00"].dropna(), 
+                          feeding_series[hour].dropna())
+            first_hour_results.loc[i] = [group, "23:00", hour, t, p]
             i += 1
             
-first_hour_sucrose_results.set_index("diet").to_csv("Figures_and_Analysis/Fig6_T_Tests.csv")
+first_hour_results.set_index("diet").to_csv("Figures_and_Analysis/Fig3AtoF_T_Tests.csv")
 
+#----Fig3G ANOVA for Final 3 Hours------   
+# Perform 1-Way ANOVA and Tukey and place the results in a dataframe
+result = activity_anova(final_feeding_frame)
+
+result.to_csv("Figures_and_Analysis/Fig3G_ANOVA_and_TukeyHSD.csv")
 
 
 #----------------------------------------------------------
-# Figure7 Generation
+# Figure4D Dataframe Generation
 #----------------------------------------------------------
 # Select only the final 3 hours of interest (from 4:00 to 7:00)
 final_hours_of_interest = sucrose_hourly_frame[["4:00", "5:00", "6:00", "group"]]
@@ -1042,30 +951,92 @@ final_barplot_plot_parameters = plot_parameters.reindex(["control ad lib", "cont
 # Add custom edge colors
 final_barplot_plot_parameters["edgecolors"] = ["darkred", "red"]
 
-# Figure 7 Size
-plt.figure(figsize=(3.543, 2.5))
 
-# Final 3 Hours
-Fig7_barplot(final_sucrose_frame, "Time Spent Drinking \nSucrose (sec)", final_barplot_plot_parameters)
+#----------------------------------------------------------
+# Figure4 Generation
+#----------------------------------------------------------
+# Figure 4 Size
+plt.figure(figsize = (3.75, 9.34))
+
+# Fig6A - HFHS AdLib
+plt.subplot2grid((22, 1), (0, 0), rowspan=5)
+Fig4AB_timeplot(normalized_sucrose["HFHS Ad Lib"], "red", "-")
+# Remove x-axis and ticks for subplot
+plt.xlabel('')
+plt.xticks([])
+# Remove leading 0
+plt.gca().yaxis.get_major_ticks()[0].label1.set_visible(False)
+plt.figtext(-0.09, 0.87, "A", fontsize = 15, color = "black", fontweight = "bold")
+### Group Label
+plt.figtext(0.7, 0.86, "HFHS AL", fontsize = 10, color = "red", fontweight = "bold")
+
+# Fig6B - HFHS Restriction
+plt.subplot2grid((22, 1), (5, 0), rowspan=5)
+Fig4AB_timeplot(normalized_sucrose["HFHS Restricted"], "red", "--")
+# Remove x-axis and ticks for subplot
+plt.xlabel('')
+plt.xticks([])
+## Remove leading 0
+plt.gca().yaxis.get_major_ticks()[0].label1.set_visible(False)
+plt.figtext(-0.09, 0.695, "B", fontsize = 15, color = "black", fontweight = "bold")
+### Group Label
+plt.figtext(0.7, 0.685, "HFHS Res", fontsize = 10, color = "red", fontweight = "bold")
+
+# HFHS Restrited - Binge
+plt.subplot2grid((22, 1), (10, 0), rowspan=5)
+Fig4C_timeplot(sucrose_hourly_frame.T.iloc[:-1, :], "HFHS restriction", "red", video_metafile)
+# Significance Markers
+plt.annotate('*', (3.7, 45), fontsize=15, color = 'black', fontweight='bold')
+plt.annotate('*', (5.7, 75), fontsize=15, color = 'black', fontweight='bold')
+plt.figtext(-0.09, 0.52, "C", fontsize = 15, color = "black", fontweight = "bold")
+### Group Label
+plt.figtext(0.7, 0.51, "HFHS Res", fontsize = 10, color = "red", fontweight = "bold")
+
+# Fig4D - Final 3 Hours
+ax = plt.subplot2grid((22, 1), (17, 0), rowspan=5, colspan=2)
+Fig4D_barplot(final_sucrose_frame, "Time Spent \nDrinking Sucrose (sec)", final_barplot_plot_parameters)
 # Increase number of yticks
 plt.yticks(np.arange(0, 175, 25))
+plt.figtext(-0.09, 0.285, "D", fontsize = 15, color = "black", fontweight = "bold")
 
-plt.savefig("Figures_And_Analysis/Fig7.tif", dpi = 1000)
+# Despine subplot
+ax.spines["right"].set_visible(False)
+ax.spines["top"].set_visible(False)
 
+plt.savefig("Figures_And_Analysis/Fig4.tif", dpi = 1000)
 
 
 #----------------------------------------------------------
-# Figure7 Statistical Analysis
+# Figure4 Statistical Analysis
 #----------------------------------------------------------
-#----ANOVA for Final 3 Hours------   
+# Running T-Tests to Compare All Hours Against the First Hour of Binge-Eating
+first_hour_sucrose_results = pd.DataFrame(columns = ["diet", "hour1", "hour2", "t-statistic", "p-value"])
+diet_groups = ["HFHS restriction"]
+i = 0
+hours_to_check = ["0:00", "1:00","2:00", "3:00","4:00", "5:00","6:00"]
+for group in diet_groups:
+    ids = video_metafile[video_metafile == group].index
+    for hour in sucrose_hourly_frame.iloc[:, :-1]:
+        sucrose_series = sucrose_hourly_frame.iloc[:, :-1].loc[ids]
+        if sucrose_series[hour].isnull().all() or hour not in hours_to_check:
+            pass
+        else:
+            t, p = stats.ttest_ind(sucrose_series["23:00"].dropna(), 
+                          sucrose_series[hour].dropna())
+            first_hour_sucrose_results.loc[i] = [group, "23:00", hour, t, p]
+            i += 1
+            
+first_hour_sucrose_results.set_index("diet").to_csv("Figures_and_Analysis/Fig4AtoC_T_Tests.csv")
+
+#----Fig4D ANOVA for Final 3 Hours------   
 # Perform 1-Way ANOVA and Tukey and place the results in a dataframe
 result = activity_anova(final_sucrose_frame)
 
-result.to_csv("Figures_and_Analysis/Fig7_ANOVA_and_TukeyHSD.csv")
+result.to_csv("Figures_and_Analysis/Fig4D_ANOVA_and_TukeyHSD.csv")
 
 
 #----------------------------------------------------------
-# Figure8 Generation
+# Figure5 Generation
 #----------------------------------------------------------
 metafile['group']=metafile.Diet+' '+metafile.Feeding
 
@@ -1095,7 +1066,7 @@ plt.subplots_adjust(wspace = 0.3 )
 subplot_n=1
 for c in gene_list[:-1]:
     plt.subplot(4,3,subplot_n)
-    Fig8_boxplot(gene_data, plot_parameters, c)
+    Fig5_boxplot(gene_data, plot_parameters, c)
     if subplot_n == 2:
         # Significance Markers for NPY
         plt.annotate('*', (2.9, 1.6), fontsize=15, color = 'black', fontweight='bold')
@@ -1125,12 +1096,11 @@ make_gene_legend()
 # Clean up plot
 sns.despine()
 plt.tight_layout()
-plt.savefig('Figures_and_Analysis/Fig8.tiff', dpi = 1000)
-
+plt.savefig('Figures_and_Analysis/Fig5.tiff', dpi = 1000)
 
 
 #----------------------------------------------------------
-# Figure8 Statistical Analysis
+# Figure5 Statistical Analysis
 #----------------------------------------------------------
 # Create a dictionary to hold MannU Whitney Results
 feeding = metafile.Feeding.unique()
@@ -1160,5 +1130,5 @@ for c in gene_list:
                 u_statistic, pVal = stats.mannwhitneyu(group1, group2)
                 gene_df.loc[i]=[c, x, y, pVal]
                 i+=1
-gene_df.set_index("gene").to_csv('Figures_and_Analysis/Fig8_Mann_Whitney.csv')
+gene_df.set_index("gene").to_csv('Figures_and_Analysis/Fig5_Mann_Whitney.csv')
 
