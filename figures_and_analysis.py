@@ -7,7 +7,7 @@
 # by Kush Attal, Julia Wickman Shihoko Kojima, Sarah N. Blythe, Natalia Toporikova
 # 
 
-# In[3]:
+# In[181]:
 
 
 #----------------------------------------------------------
@@ -19,13 +19,16 @@ import datetime
 import os 
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
+from matplotlib.lines import Line2D
 import seaborn as sns
 import math 
 import matplotlib.gridspec as gridspec
 from scipy import stats
 from statsmodels.formula.api import ols
 from statsmodels.stats.anova import anova_lm
+from pingouin import mixed_anova, read_dataset, pairwise_ttests
 import statsmodels.stats.multicomp
+from statsmodels.stats.power import TTestIndPower
 import zipfile
 import shutil
 import sys
@@ -45,7 +48,7 @@ if sys.version < "3.8.2":
     raise Exception("Must be using Python 3.8.2 or newer")
 
 
-# In[4]:
+# In[182]:
 
 
 #----------------------------------------------------------
@@ -78,7 +81,7 @@ def Fig1A_timeplot(metafile, body_weight):
     plt.xticks(fontweight = 'bold', fontsize=10, color = "black")
     plt.legend(artists, ('Cont\nAL', 'Cont\nRes', 'HFHS\nAL', 'HFHS\nRes'), fontsize = 6)
     
-# Method to run ANOVA stats and Tukey Posthoc on body weight data for each day
+# Method to run 2-Factor (both Between Factor) ANOVA stats and Tukey Posthoc on body weight data for each day
 def day_anova_analysis(day, anova_data):
     formula = 'Q("' + day + '") ~ C(Diet) + C(Feeding) + C(Diet):C(Feeding)'
     model = ols(formula, anova_data).fit()
@@ -144,7 +147,7 @@ def make_legend():
     return()
 
     
-# Method to run ANOVA stats and Tukey Posthoc on metabolite data
+# Method to run 2-Factor (both Between Factor) ANOVA stats and Tukey Posthoc on metabolite data
 def metabolite_anova_analysis(metabolite, anova_data):
     formula = metabolite + ' ~ C(diet) + C(feeding_schedule) + C(diet):C(feeding_schedule)'
     model = ols(formula, anova_data).fit()
@@ -157,6 +160,57 @@ def metabolite_anova_analysis(metabolite, anova_data):
     result = pd.concat([aov_table, mc_interaction], axis = 0, sort = False)
 
     return result
+
+# Function to create Fig2 bar plot
+def Fig2A_barplot(df, df2, title, palette_type, ymax = 8000):
+    ax = sns.barplot(x="group", y="total", data = df, 
+                     ci = 68, capsize=.1, errwidth=0.9)
+    
+    ax_top = sns.barplot(x="group", y="total_food", data = df2, 
+                     ci = 68, capsize=.1, errwidth=0.9)
+    
+    # Collect the color properties for the bars
+    second_phase_bars = ax.patches[0:4]
+    first_phase_bars = ax_top.patches[4:8]
+    # Make hatched pattern to distinguish between ad lib and restriction
+    for i, hatch, fill, firstphase, secondphase in zip(palette_type.edgecolors, palette_type.hatches, palette_type.fill_color, first_phase_bars, second_phase_bars):
+        # Set same face color for all 2 phases
+        firstphase.set_facecolor(fill)
+        secondphase.set_facecolor(adjust_lightness(fill))
+        #secondphase.set_facecolor(fill)
+        
+        # Set same hatch pattern for all 2 phases
+        firstphase.set_hatch(hatch)
+        secondphase.set_hatch(hatch)
+        
+        # Set same edge color for all 2 phases
+        firstphase.set_edgecolor(i)
+        secondphase.set_edgecolor(adjust_lightness(i))
+        
+    # Add x- and y-labels, ticks, and units
+    plt.ylabel(title, fontsize=10, fontweight = "bold", color = "black")
+    plt.ylim(0,ymax)
+    plt.xlabel('')
+    plt.xticks(range(len(palette_type.index)), ('Cont\nAL', 'Cont\nRes', 'HFHS\nAL', 'HFHS\nRes'), fontweight = 'bold', fontsize=10, color = "black")
+    plt.yticks(fontweight = 'bold', fontsize=10, color = "black")
+    
+    # Set error bar colors
+    plt.setp(ax.lines[0:3], color = "black")
+    plt.setp(ax.lines[3:6], color = "gray")
+    plt.setp(ax.lines[12:18], color = "white", linewidth = 0)
+    plt.setp(ax.lines[18:21], color = "darkred")
+    plt.setp(ax.lines[21:24], color = "red")
+    plt.setp(ax.lines[6:12], color = "red")
+    
+    # Add custom legend
+    legend_elements = [Line2D([0], [0], marker='o', color='w', label='Sucrose', markerfacecolor=adjust_lightness('red'), markersize=8),
+                       Line2D([0], [0], marker='o', color='w', label='HFHS Feeding', markerfacecolor='red', markersize=8), 
+                       Line2D([0], [0], marker='o', color='w', label='Cont Feeding', markerfacecolor='gray', markersize=8)]
+    ax.legend(handles=legend_elements, loc='upper right', fontsize = 8)
+    
+    # Remove unnecessary axes
+    sns.despine()
+    plt.tight_layout()
 
 # Function to create Fig2A box plot
 def Fig2A_boxplot(df, variable, title, palette_type, ymax = 8000):
@@ -409,7 +463,7 @@ def Fig4D_barplot(df, title, barplot_plot_parameters, ymax = 150):
     # Remove legend
     ax.get_legend().remove()
     
-# Method to run ANOVA and Tukey on feeding and sucrose activity (final 3 hours)
+# Method to run 1-Way (Between Factor) ANOVA and Tukey on feeding and sucrose activity (final 3 hours)
 def activity_anova(anova_data):
     
     # The numerical response variable (Consumption Rate - number of seconds spent feeding) and 
@@ -432,7 +486,7 @@ def activity_anova(anova_data):
     # Combine the 1-Way ANOVA results and Tukey PostHoc results into 1 dataframe
     result = pd.concat([aov_table, mc_interaction], axis = 0, sort = False)
     # Remove irrelevant comparisons
-    result.drop([2, 3, 4, 6, 7, 8, 9, 10, 11], axis = 0, inplace = True)
+    #result.drop([2, 3, 4, 6, 7, 8, 9, 10, 11], axis = 0, inplace = True)
     result = result.fillna("").rename(index={0:'', 1:'', 5:'', 12:'', 13:'', 14:''})
     return result
 
@@ -464,7 +518,7 @@ def make_gene_legend():
     return()
 
 
-# In[5]:
+# In[183]:
 
 
 #----------------------------------------------------------
@@ -474,7 +528,7 @@ if not os.path.exists("Figures_And_Analysis"):
     os.mkdir("Figures_And_Analysis")
 
 
-# In[12]:
+# In[184]:
 
 
 #----------------------------------------------------------
@@ -531,7 +585,7 @@ sucrose_hourly_frame = pd.read_csv(sucrose_archive.open('sucrose_total_by_hour.c
 gene_data = pd.read_csv("Data for figures/qPCR_normalized_gapdph.csv", index_col=0)
 
 
-# In[13]:
+# In[185]:
 
 
 #----------------------------------------------------------
@@ -609,7 +663,7 @@ plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=0.6, hs
 plt.savefig('Figures_And_Analysis/Fig1.tif', dpi = 1000)
 
 
-# In[14]:
+# In[186]:
 
 
 #----------------------------------------------------------
@@ -619,39 +673,49 @@ plt.savefig('Figures_And_Analysis/Fig1.tif', dpi = 1000)
 body_weight.set_index("Rat", inplace = True)
 body_weight['diet_and_schedule'] = body_weight["Diet"].astype(str) +" "+ body_weight["Feeding"].astype(str)
 
-# Fig1A - preTRF 
-# Hold results in dictionary to send to CSV File
-cont_hfhs_t_test_results = {}
+# Fig1A - 2x2 Mixed Model ANOVA for pre-TRF Body Weight Results 
+## Only comparing HFHS ad lib (n=17) vs Cont ad lib (n=18) (no restricted access yet)
+mix_anova_df = body_weight.reset_index().drop(["Feeding", "Diet"], axis=1).melt(id_vars=["diet_and_schedule", "Rat"]).rename(columns={"variable": "Time", "value": "body_weight"})
+preTRF = mix_anova_df.loc[0:944].replace({"HFHS restriction": "HFHS ad lib", "control restriction": "control ad lib"})
+aov = mixed_anova(dv='body_weight', between='diet_and_schedule', within='Time', subject='Rat', data=preTRF).round(3)
 
+# Fig1A - TukeyHSD for pre-TRF Body Weight Results
+preTRF_Tukey_results = pd.DataFrame()
+
+# Run TukeyHSD of body weight between HFHS ad lib (n=17) vs Control ad lib (n=18) (2 groups) every day until 28th day
 daynumber = 1
-for day in plot_body_weight.index:
-    groupa = body_weight.where((body_weight.diet_and_schedule == "control ad lib") | (body_weight.diet_and_schedule == "control restriction"))[day].dropna()
-    groupb = body_weight.where((body_weight.diet_and_schedule == "HFHS ad lib") | (body_weight.diet_and_schedule == "HFHS restriction"))[day].dropna()
-    # Control AdLib + Control Restricted vs HFHS AdLib + HFHS Restricted
-    cont_hfhs_t_test_results["Day " + str(daynumber) + ": " + day + " - Control AdLib + Control Restricted vs HFHS AdLib + HFHS Restricted"] = stats.ttest_ind(groupa,groupb)
+for day in plot_body_weight.index[0:27]:
+    result = day_anova_analysis(day, body_weight.replace({"HFHS restriction": "HFHS ad lib", "control restriction": "control ad lib"}))
+    result.iloc[0, -1] = day
+    result.iloc[1, -1] = "Day: " + str(daynumber)
+    preTRF_Tukey_results = preTRF_Tukey_results.append(result)
     daynumber += 1
     
-# Control AdLib + Control Restricted vs HFHS AdLib + HFHS Restricted Results
-cont_hfhs_t_test_results_df = pd.DataFrame.from_dict(cont_hfhs_t_test_results, orient='Index')
-cont_hfhs_t_test_results_df.columns = ['statistic','pvalue']
 # Send Results to CSV File
-cont_hfhs_t_test_results_df.to_csv("Figures_And_Analysis/Fig1A_T_Test_preTRF.csv")
+preTRF_Tukey_clean = preTRF_Tukey_results.fillna("").rename(index={0:'', 1:'', 2:'', 3:'', 4:'', 5:''}).iloc[:,5:].reset_index(drop=True)
+pd.concat([aov, preTRF_Tukey_clean]).fillna("").to_csv("Figures_And_Analysis/Fig1A_MixedModel_ANOVA_and_TukeyHSD_preTRF.csv", index = False)
 
-# Fig1A - postTRF
-body_weight_anova_results = pd.DataFrame()
+# Fig1A - 2x2 Mixed Model ANOVA for post-TRF Body Weight Results
+## Between-Factor is between 4 diet-schedule groups
+postTRF = mix_anova_df.loc[945::]
+aov = mixed_anova(dv='body_weight', between='diet_and_schedule', within='Time', subject='Rat', data=postTRF).round(3)
 
-# Run ANOVA and Tukey of body weight for each of 4 diet groups every day
-daynumber = 1
-for day in plot_body_weight.index:
+# Fig1A - TukeyHSD for post-TRF Body Weight Results
+postTRF_Tukey_results = pd.DataFrame()
+
+# Run TukeyHSD of body weight for each of 4 diet groups every day from day 28 (when restriction begins)
+daynumber = 28
+for day in plot_body_weight.index[27::]:
     result = day_anova_analysis(day, body_weight)
     result.iloc[0, -1] = day
     result.iloc[1, -1] = "Day: " + str(daynumber)
-    body_weight_anova_results = body_weight_anova_results.append(result)
+    postTRF_Tukey_results = postTRF_Tukey_results.append(result)
     daynumber += 1
 # Send Results to CSV File
-body_weight_anova_results.fillna("").rename(index={0:'', 1:'', 2:'', 3:'', 4:'', 5:''}).to_csv("Figures_And_Analysis/Fig1A_ANOVA_and_TukeyHSD_postTRF.csv")
+postTRF_Tukey_clean = postTRF_Tukey_results.fillna("").rename(index={0:'', 1:'', 2:'', 3:'', 4:'', 5:''}).iloc[:,5:].reset_index(drop=True)
+pd.concat([aov, postTRF_Tukey_clean]).fillna("").to_csv("Figures_And_Analysis/Fig1A_MixedModel_ANOVA_and_TukeyHSD_postTRF.csv", index = False)
 
-# Fig1B ANOVA analysis
+# Fig1B 2x2 Simple ANOVA (2 Between Factors) analysis
 total_fat_mass_anova = metabolite_anova_analysis("total_fat_pad", master_data.set_index("Rat"))
 
 # Send Results to CSV File
@@ -662,10 +726,9 @@ metabolites_hormones = ['Leptin', 'Adiponectin', 'Triglyceride', 'liver_weight']
 
 metabolite_results = pd.DataFrame()
 
-# Fig1C through F ANOVA and Tukey
+# Fig1C through F - 2x2 Simple ANOVA and Tukey
 for group in metabolites_hormones:
     result = metabolite_anova_analysis(group, master_data.set_index("Rat"))
-
     result.iloc[0, -1] = group
     metabolite_results = metabolite_results.append(result)
 
@@ -673,7 +736,7 @@ for group in metabolites_hormones:
 metabolite_results.fillna("").rename(index={0:'', 1:'', 2:'', 3:'', 4:'', 5:''}).to_csv("Figures_And_Analysis/Fig1CtoF_ANOVA_and_Tukey.csv")
 
 
-# In[15]:
+# In[187]:
 
 
 #----------------------------------------------------------
@@ -718,16 +781,18 @@ plot_feeding_frame = plot_feeding_frame.reset_index(drop = True)
 barplot_plot_parameters = plot_parameters.reindex(["control restriction", "HFHS restriction", "control ad lib", "HFHS ad lib"]).iloc[-2:]
 # Add custom edge colors
 barplot_plot_parameters["edgecolors"] = ["black", "darkred"]
+plot_parameters["edgecolors"] = ["black", "gray", "darkred", "red"]
 
 # Figure 2 Size
 plt.figure(figsize=(7.48, 2.5))
 
 # Figure 2A
 plt.subplot(1,2,1)
-Fig2A_boxplot(sucrose_and_feeding_data, 'total', "Total Time \n Consuming Calories (sec)", plot_parameters)
+#Fig2A_boxplot(sucrose_and_feeding_data, 'total', "Total Time \n Consuming Calories (sec)", plot_parameters)
+Fig2A_barplot(sucrose_and_feeding_data, feeding_data,  "Total Time \n Consuming Calories (sec)", plot_parameters)
 plt.figtext(0.01, 0.88, "A", fontsize = 15, color = "black", fontweight = "bold")
 # Significance Markers
-plt.annotate('#', (0.95, 7000), fontsize=15, color = 'black', fontweight='bold')
+plt.annotate('#', (0.95, 5000), fontsize=15, color = 'black', fontweight='bold')
 
 # Figure 2B
 plt.subplot(1,2,2)
@@ -748,7 +813,7 @@ plt.annotate('a', (0.45, 4600), fontsize=10, color = 'black', fontweight='bold')
 plt.savefig('Figures_And_Analysis/Fig2.tif', dpi = 1000)
 
 
-# In[16]:
+# In[188]:
 
 
 #----------------------------------------------------------
@@ -786,7 +851,7 @@ results.loc[5] = ["control ad lib Night Ratio", "HFHS ad lib Night Ratio", t, p]
 results.set_index("group1").to_csv("Figures_And_Analysis/Fig2_T_Tests.csv")
 
 
-# In[27]:
+# In[189]:
 
 
 #----------------------------------------------------------
@@ -823,7 +888,7 @@ final_barplot_plot_parameters = plot_parameters.reindex(["control ad lib", "HFHS
 final_barplot_plot_parameters["edgecolors"] = ["grey", "red"]
 
 
-# In[28]:
+# In[190]:
 
 
 #----------------------------------------------------------
@@ -898,6 +963,7 @@ plt.yticks([])
 # Significance Markers
 plt.annotate('*', (5.7, 200), fontsize=15, color = 'black', fontweight='bold')
 plt.annotate('*', (6.7, 210), fontsize=15, color = 'black', fontweight='bold')
+plt.annotate('*', (7.6, 215), fontsize=15, color = 'black', fontweight='bold')
 plt.annotate('*', (8.5, 160), fontsize=15, color = 'black', fontweight='bold')
 plt.figtext(0.5, 0.515, "F", fontsize = 15, color = "black", fontweight = "bold")
 ### Group Label
@@ -923,39 +989,73 @@ plt.subplots_adjust(wspace=0.15, hspace=None)
 plt.savefig("Figures_And_Analysis/Fig3.tif", dpi = 1000, bbox_inches="tight")
 
 
-# In[19]:
+# In[191]:
 
 
 #----------------------------------------------------------
 # Figure3 Statistical Analysis
 #----------------------------------------------------------
-# Running T-Tests to Compare All Hours Against the First Hour of Binge-Eating
-first_hour_results = pd.DataFrame(columns = ["diet", "hour1", "hour2", "t-statistic", "p-value"])
-diet_groups = ["control restriction", "HFHS restriction"]
-i = 0
-hours_to_check = ["0:00", "1:00","2:00", "3:00","4:00", "5:00","6:00"]
-for group in diet_groups:
-    ids = video_metafile[video_metafile == group].index
-    for hour in feeding_hourly_frame.iloc[:, :-1]:
-        feeding_series = feeding_hourly_frame.iloc[:, :-1].loc[ids]
-        if feeding_series[hour].isnull().all() or hour not in hours_to_check:
-            pass
-        else:
-            t, p = stats.ttest_ind(feeding_series["23:00"].dropna(), 
-                          feeding_series[hour].dropna())
-            first_hour_results.loc[i] = [group, "23:00", hour, t, p]
-            i += 1
-            
-first_hour_results.set_index("diet").to_csv("Figures_and_Analysis/Fig3AtoF_T_Tests.csv")
+eight_hour_period = ["23:00", "0:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00"]
+three_hour_period = ["4:00", "5:00", "6:00"]
 
-#----Fig3G ANOVA for Final 3 Hours------   
-# Perform 1-Way ANOVA and Tukey and place the results in a dataframe
-result = activity_anova(final_feeding_frame)
+#---------------HFHSRes---------------------------------------
+#-------Fig3F Repeated Measure ANOVA + Tukey for 8 hours-------
+# Create dataframe of HFHSRes data over 8 hours
+HFHSRes = feeding_hourly_frame.where(feeding_hourly_frame.group == "HFHS restriction").dropna(how="all").reset_index().melt(id_vars=["group", "index"]).rename(columns={"index": "Rat", "variable": "phase", "value": "Consumption_Rate"})
+HFHSRes_8h = HFHSRes[HFHSRes["phase"].isin(eight_hour_period)]
+HFHSRes_8h["group_and_phase"] = HFHSRes_8h["group"] + " " + HFHSRes_8h["phase"]
 
-result.to_csv("Figures_and_Analysis/Fig3G_ANOVA_and_TukeyHSD.csv")
+# Repeated Measure ANOVA with Multiple Comparisions for 1st Hour vs Remaining 7 hours
+aov = HFHSRes_8h.rm_anova(dv='Consumption_Rate', within='phase', subject='Rat',  detailed=True)
+# Posthoc TukeyHSD
+result = activity_anova(HFHSRes_8h)
+# Send results to CSV
+result_clean = result.fillna("").rename(index={0:'', 1:'', 2:'', 3:'', 4:'', 5:''}).iloc[:,5:].reset_index(drop=True)
+pd.concat([aov, result_clean]).fillna("").to_csv("Figures_and_Analysis/Fig3F_RMAnova_Tukey.csv", index = False)
+
+#-------Fig3G Repeated Measure ANOVA + Tukey for final 3 hours----
+# Create dataframe of HFHSRes data over 3 hours
+HFHSRes_3h = HFHSRes[HFHSRes["phase"].isin(three_hour_period)]
+HFHSRes_3h["group_and_phase"] = HFHSRes_3h["group"] + " " + HFHSRes_3h["phase"]
+
+# Repeated Measure ANOVA with Multiple Comparisions for final 3 hours
+aov = HFHSRes_3h.rm_anova(dv='Consumption_Rate', within='phase', subject='Rat',  detailed=True)
+# Posthoc TukeyHSD
+result = activity_anova(HFHSRes_3h)
+# Send results to CSV
+result_clean = result.fillna("").rename(index={0:'', 1:'', 2:'', 3:'', 4:'', 5:''}).iloc[:,5:].reset_index(drop=True)
+pd.concat([aov, result_clean]).fillna("").to_csv("Figures_and_Analysis/Fig3G_RMAnova_Tukey_HFHSRes.csv", index = False)
+
+#---------------ContRes---------------------------------------
+#-------Fig3E Repeated Measure ANOVA + Tukey for 8 hours-------
+# Create dataframe of ContRes data over 8 hours
+ContRes = feeding_hourly_frame.where(feeding_hourly_frame.group == "control restriction").dropna(how="all").reset_index().melt(id_vars=["group", "index"]).rename(columns={"index": "Rat", "variable": "phase", "value": "Consumption_Rate"})
+ContRes_8h = ContRes[ContRes["phase"].isin(eight_hour_period)].dropna()
+ContRes_8h["group_and_phase"] = ContRes_8h["group"] + " " + ContRes_8h["phase"]
+
+# Repeated Measure ANOVA with Multiple Comparisions for 1st Hour vs Remaining 7 hours
+aov = ContRes_8h.rm_anova(dv='Consumption_Rate', within='phase', subject='Rat',  detailed=True)
+# Posthoc TukeyHSD
+result = activity_anova(ContRes_8h)
+# Send results to CSV
+result_clean = result.fillna("").rename(index={0:'', 1:'', 2:'', 3:'', 4:'', 5:''}).iloc[:,5:].reset_index(drop=True)
+pd.concat([aov, result_clean]).fillna("").to_csv("Figures_and_Analysis/Fig3E_RMAnova_Tukey.csv", index = False)
+
+#-------Fig3G Repeated Measure ANOVA + Tukey for final 3 hours----
+# Create dataframe of ContRes data over 3 hours
+ContRes_3h = ContRes[ContRes["phase"].isin(three_hour_period)].dropna()
+ContRes_3h["group_and_phase"] = ContRes_3h["group"] + " " + ContRes_3h["phase"]
+
+# Repeated Measure ANOVA with Multiple Comparisions for final 3 hours
+aov = ContRes_3h.rm_anova(dv='Consumption_Rate', within='phase', subject='Rat',  detailed=True)
+# Posthoc TukeyHSD
+result = activity_anova(ContRes_3h)
+# Send results to CSV
+result_clean = result.fillna("").rename(index={0:'', 1:'', 2:'', 3:'', 4:'', 5:''}).iloc[:,5:].reset_index(drop=True)
+pd.concat([aov, result_clean]).fillna("").to_csv("Figures_and_Analysis/Fig3G_RMAnova_Tukey_ContRes.csv", index = False)
 
 
-# In[20]:
+# In[192]:
 
 
 #----------------------------------------------------------
@@ -992,7 +1092,7 @@ final_barplot_plot_parameters = plot_parameters.reindex(["control ad lib", "cont
 final_barplot_plot_parameters["edgecolors"] = ["darkred", "red"]
 
 
-# In[25]:
+# In[193]:
 
 
 #----------------------------------------------------------
@@ -1027,8 +1127,8 @@ plt.figtext(0.85, 0.91, "HFHS Res", fontsize = 10, color = "red", fontweight = "
 plt.subplot2grid((2, 2), (1, 0))
 Fig4C_timeplot(sucrose_hourly_frame.T.iloc[:-1, :], "HFHS restriction", "red", video_metafile)
 # Significance Markers
-plt.annotate('*', (3.7, 45), fontsize=15, color = 'black', fontweight='bold')
-plt.annotate('*', (5.7, 75), fontsize=15, color = 'black', fontweight='bold')
+#plt.annotate('*', (3.7, 45), fontsize=15, color = 'black', fontweight='bold')
+#plt.annotate('*', (5.7, 75), fontsize=15, color = 'black', fontweight='bold')
 plt.figtext(0.02, 0.45, "C", fontsize = 15, color = "black", fontweight = "bold")
 ### Group Label
 plt.figtext(0.37, 0.43, "HFHS Res", fontsize = 10, color = "red", fontweight = "bold")
@@ -1049,39 +1149,57 @@ plt.tight_layout()
 plt.savefig("Figures_And_Analysis/Fig4.tif", dpi = 1000, bbox_inches="tight")
 
 
-# In[22]:
+# In[194]:
 
 
 #----------------------------------------------------------
 # Figure4 Statistical Analysis
 #----------------------------------------------------------
-# Running T-Tests to Compare All Hours Against the First Hour of Binge-Eating
-first_hour_sucrose_results = pd.DataFrame(columns = ["diet", "hour1", "hour2", "t-statistic", "p-value"])
-diet_groups = ["HFHS restriction"]
-i = 0
-hours_to_check = ["0:00", "1:00","2:00", "3:00","4:00", "5:00","6:00"]
-for group in diet_groups:
-    ids = video_metafile[video_metafile == group].index
-    for hour in sucrose_hourly_frame.iloc[:, :-1]:
-        sucrose_series = sucrose_hourly_frame.iloc[:, :-1].loc[ids]
-        if sucrose_series[hour].isnull().all() or hour not in hours_to_check:
-            pass
-        else:
-            t, p = stats.ttest_ind(sucrose_series["23:00"].dropna(), 
-                          sucrose_series[hour].dropna())
-            first_hour_sucrose_results.loc[i] = [group, "23:00", hour, t, p]
-            i += 1
-            
-first_hour_sucrose_results.set_index("diet").to_csv("Figures_and_Analysis/Fig4AtoC_T_Tests.csv")
+#---------------------HFHSRes----------------------------
+#-------Fig4C Repeated Measure ANOVA + Tukey for 8 hours-------
+# Create dataframe of HFHSRes data over 8 hours
+HFHSRes = sucrose_hourly_frame.where(sucrose_hourly_frame.group == "HFHS restriction").dropna(how="all").reset_index().melt(id_vars=["group", "index"]).rename(columns={"index": "Rat", "variable": "phase", "value": "Consumption_Rate"})
+HFHSRes_8h = HFHSRes[HFHSRes["phase"].isin(eight_hour_period)]
+HFHSRes_8h["group_and_phase"] = HFHSRes_8h["group"] + " " + HFHSRes_8h["phase"]
 
-#----Fig4D ANOVA for Final 3 Hours------   
-# Perform 1-Way ANOVA and Tukey and place the results in a dataframe
-result = activity_anova(final_sucrose_frame)
+# Repeated Measure ANOVA with Multiple Comparisions for 1st Hour vs Remaining 7 hours
+aov = HFHSRes_8h.rm_anova(dv='Consumption_Rate', within='phase', subject='Rat',  detailed=True)
+# Posthoc TukeyHSD
+result = activity_anova(HFHSRes_8h)
+# Send results to CSV
+result_clean = result.fillna("").rename(index={0:'', 1:'', 2:'', 3:'', 4:'', 5:''}).iloc[:,5:].reset_index(drop=True)
+pd.concat([aov, result_clean]).fillna("").to_csv("Figures_and_Analysis/Fig4C_RMAnova_Tukey.csv", index = False)
 
-result.to_csv("Figures_and_Analysis/Fig4D_ANOVA_and_TukeyHSD.csv")
+#-------Fig3G Repeated Measure ANOVA + Tukey for final 3 hours----
+# Create dataframe of HFHSRes data over 3 hours
+HFHSRes_3h = HFHSRes[HFHSRes["phase"].isin(three_hour_period)]
+HFHSRes_3h["group_and_phase"] = HFHSRes_3h["group"] + " " + HFHSRes_3h["phase"]
+
+# Repeated Measure ANOVA with Multiple Comparisions for final 3 hours
+aov = HFHSRes_3h.rm_anova(dv='Consumption_Rate', within='phase', subject='Rat',  detailed=True)
+# Posthoc TukeyHSD
+result = activity_anova(HFHSRes_3h)
+# Send results to CSV
+result_clean = result.fillna("").rename(index={0:'', 1:'', 2:'', 3:'', 4:'', 5:''}).iloc[:,5:].reset_index(drop=True)
+pd.concat([aov, result_clean]).fillna("").to_csv("Figures_and_Analysis/Fig4D_RMAnova_Tukey_HFHSRes.csv", index = False)
+
+#---------------------HFHSAL----------------------------
+#-------Fig3G Repeated Measure ANOVA + Tukey for final 3 hours----
+# Create dataframe of HFHSAL data over 3 hours
+HFHSAL = sucrose_hourly_frame.where(sucrose_hourly_frame.group == "HFHS ad lib").dropna(how="all").reset_index().melt(id_vars=["group", "index"]).rename(columns={"index": "Rat", "variable": "phase", "value": "Consumption_Rate"})
+HFHSAL_3h = HFHSAL[HFHSAL["phase"].isin(three_hour_period)]
+HFHSAL_3h["group_and_phase"] = HFHSAL_3h["group"] + " " + HFHSAL_3h["phase"]
+
+# Repeated Measure ANOVA with Multiple Comparisions for final 3 hours
+aov = HFHSAL_3h.rm_anova(dv='Consumption_Rate', within='phase', subject='Rat',  detailed=True)
+# Posthoc TukeyHSD
+result = activity_anova(HFHSAL_3h)
+# Send results to CSV
+result_clean = result.fillna("").rename(index={0:'', 1:'', 2:'', 3:'', 4:'', 5:''}).iloc[:,5:].reset_index(drop=True)
+pd.concat([aov, result_clean]).fillna("").to_csv("Figures_and_Analysis/Fig4D_RMAnova_Tukey_HFHSAL.csv", index = False)
 
 
-# In[23]:
+# In[195]:
 
 
 #----------------------------------------------------------
@@ -1148,7 +1266,7 @@ plt.tight_layout()
 plt.savefig('Figures_and_Analysis/Fig5.tiff', dpi = 1000)
 
 
-# In[24]:
+# In[196]:
 
 
 #----------------------------------------------------------
