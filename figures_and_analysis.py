@@ -7,7 +7,7 @@
 # by Kush Attal, Julia Wickman Shihoko Kojima, Sarah N. Blythe, Natalia Toporikova
 # 
 
-# In[181]:
+# In[1]:
 
 
 #----------------------------------------------------------
@@ -48,7 +48,7 @@ if sys.version < "3.8.2":
     raise Exception("Must be using Python 3.8.2 or newer")
 
 
-# In[182]:
+# In[2]:
 
 
 #----------------------------------------------------------
@@ -518,7 +518,7 @@ def make_gene_legend():
     return()
 
 
-# In[183]:
+# In[3]:
 
 
 #----------------------------------------------------------
@@ -528,7 +528,7 @@ if not os.path.exists("Figures_And_Analysis"):
     os.mkdir("Figures_And_Analysis")
 
 
-# In[184]:
+# In[4]:
 
 
 #----------------------------------------------------------
@@ -585,7 +585,7 @@ sucrose_hourly_frame = pd.read_csv(sucrose_archive.open('sucrose_total_by_hour.c
 gene_data = pd.read_csv("Data for figures/qPCR_normalized_gapdph.csv", index_col=0)
 
 
-# In[185]:
+# In[5]:
 
 
 #----------------------------------------------------------
@@ -663,7 +663,7 @@ plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=0.6, hs
 plt.savefig('Figures_And_Analysis/Fig1.tif', dpi = 1000)
 
 
-# In[186]:
+# In[6]:
 
 
 #----------------------------------------------------------
@@ -736,7 +736,7 @@ for group in metabolites_hormones:
 metabolite_results.fillna("").rename(index={0:'', 1:'', 2:'', 3:'', 4:'', 5:''}).to_csv("Figures_And_Analysis/Fig1CtoF_ANOVA_and_Tukey.csv")
 
 
-# In[187]:
+# In[7]:
 
 
 #----------------------------------------------------------
@@ -813,7 +813,7 @@ plt.annotate('a', (0.45, 4600), fontsize=10, color = 'black', fontweight='bold')
 plt.savefig('Figures_And_Analysis/Fig2.tif', dpi = 1000)
 
 
-# In[188]:
+# In[8]:
 
 
 #----------------------------------------------------------
@@ -851,7 +851,7 @@ results.loc[5] = ["control ad lib Night Ratio", "HFHS ad lib Night Ratio", t, p]
 results.set_index("group1").to_csv("Figures_And_Analysis/Fig2_T_Tests.csv")
 
 
-# In[189]:
+# In[9]:
 
 
 #----------------------------------------------------------
@@ -888,7 +888,7 @@ final_barplot_plot_parameters = plot_parameters.reindex(["control ad lib", "HFHS
 final_barplot_plot_parameters["edgecolors"] = ["grey", "red"]
 
 
-# In[190]:
+# In[10]:
 
 
 #----------------------------------------------------------
@@ -989,7 +989,7 @@ plt.subplots_adjust(wspace=0.15, hspace=None)
 plt.savefig("Figures_And_Analysis/Fig3.tif", dpi = 1000, bbox_inches="tight")
 
 
-# In[191]:
+# In[11]:
 
 
 #----------------------------------------------------------
@@ -1055,7 +1055,7 @@ result_clean = result.fillna("").rename(index={0:'', 1:'', 2:'', 3:'', 4:'', 5:'
 pd.concat([aov, result_clean]).fillna("").to_csv("Figures_and_Analysis/Fig3G_RMAnova_Tukey_ContRes.csv", index = False)
 
 
-# In[192]:
+# In[12]:
 
 
 #----------------------------------------------------------
@@ -1092,7 +1092,7 @@ final_barplot_plot_parameters = plot_parameters.reindex(["control ad lib", "cont
 final_barplot_plot_parameters["edgecolors"] = ["darkred", "red"]
 
 
-# In[193]:
+# In[13]:
 
 
 #----------------------------------------------------------
@@ -1149,7 +1149,7 @@ plt.tight_layout()
 plt.savefig("Figures_And_Analysis/Fig4.tif", dpi = 1000, bbox_inches="tight")
 
 
-# In[194]:
+# In[14]:
 
 
 #----------------------------------------------------------
@@ -1199,7 +1199,7 @@ result_clean = result.fillna("").rename(index={0:'', 1:'', 2:'', 3:'', 4:'', 5:'
 pd.concat([aov, result_clean]).fillna("").to_csv("Figures_and_Analysis/Fig4D_RMAnova_Tukey_HFHSAL.csv", index = False)
 
 
-# In[195]:
+# In[15]:
 
 
 #----------------------------------------------------------
@@ -1266,7 +1266,7 @@ plt.tight_layout()
 plt.savefig('Figures_and_Analysis/Fig5.tiff', dpi = 1000)
 
 
-# In[196]:
+# In[17]:
 
 
 #----------------------------------------------------------
@@ -1286,7 +1286,7 @@ for x in diet:
             
 # MannU Whitney Analysis
 groups = metafile.group.unique()
-column_names = ["gene", "group1", "group2", "p_value"]
+column_names = ["gene", "group1", "group2", "U-statistic", "p_value"]
 gene_df = pd.DataFrame(columns = column_names)
 i=0
 for c in gene_list:
@@ -1298,7 +1298,7 @@ for c in gene_list:
             if(y!= x):
                 group2 = group_dict[y][c]
                 u_statistic, pVal = stats.mannwhitneyu(group1, group2)
-                gene_df.loc[i]=[c, x, y, pVal]
+                gene_df.loc[i]=[c, x, y, u_statistic, pVal]
                 i+=1
 gene_df.set_index("gene").to_csv('Figures_and_Analysis/Fig5_Mann_Whitney.csv')
 
