@@ -14,7 +14,6 @@ import os
 import zipfile
 import shutil
 import sys
-import openpyxl
 
 #----------------------------------------------------------
 # Check Python Version
